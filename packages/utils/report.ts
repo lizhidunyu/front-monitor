@@ -2,14 +2,14 @@
  * @description: 上报数据信息
  */
 
-import { IReportConfig, IReportData, Type } from '../../types'
+import { IReportConfig, IReportData, Type } from '../types'
 import {
   generateUniqueId,
   isSupportSendBeacon,
   originalOpen,
   originalSend
-} from '../../utils'
-import { config } from './config'
+} from './core'
+import { config } from '../core/src/config'
 import { CacheData } from './cache-data'
 
 // 1.缓存数据，延迟上报 | 数据量达到一定大小上报
@@ -45,6 +45,8 @@ export const reportData = (type: Type, data: IReportData) => {
   if (!config.url) {
     console.error('请设置上传 url 地址')
   }
+  console.log('config:', config)
+
   const reportParams: IReportConfig = {
     id: generateUniqueId(type, new Date().getTime()), //唯一id
     config: { ...config },
@@ -54,6 +56,7 @@ export const reportData = (type: Type, data: IReportData) => {
     currentPage: window.location.href, // 当前页面
     ua: navigator.userAgent //ua信息
   }
+
   const reportParamsStr: string = JSON.stringify(reportParams)
   handleReportTime(reportParamsStr, config.reportConfig)
 }

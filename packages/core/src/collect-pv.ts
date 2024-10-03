@@ -2,7 +2,7 @@
  * @description: 收集页面的pv数据
  */
 
-import { lazyReport } from './report'
+import { lazyReport } from '../../utils'
 import { IReportData, IPVData } from '../../types'
 
 export function getPV() {

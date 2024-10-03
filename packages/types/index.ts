@@ -1,13 +1,13 @@
+export { Type, SubType, IReportData, IReportConfig } from './common'
+
 export {
-  Type,
-  SubType,
   IConfig,
   IOptions,
   IWindowErrorData,
   IPromiseErrorData,
   IResourceErrorData,
   ICustomErrOptions,
-  IReportData,
-  IReportConfig,
   IPVData
-} from './core/index'
+} from './core'
+
+export { ITTFBData, IPerformanceOptions } from './performance'

@@ -1,4 +1,4 @@
-import { IReportData } from '../../types'
+import { IReportData } from '../types'
 
 export class CacheData {
   private cacheStore

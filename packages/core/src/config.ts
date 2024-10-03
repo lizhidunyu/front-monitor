@@ -1,4 +1,4 @@
-import { IConfig } from '../../types/index'
+import { IConfig } from '../../types'
 
 const config: IConfig = {
   url: '',
@@ -8,8 +8,6 @@ const config: IConfig = {
     isImgReport: false, // 是否采用图片上报
     isImmediate: false // 是否延迟上报
   }
-  // reportUrl: ''
-  // TODO:此处省略其他配置
 }
 
 function setConfig(options: Partial<IConfig>, target: any = config): void {

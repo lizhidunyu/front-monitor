@@ -1,18 +1,22 @@
-import { IReportData, IOptions, ICustomErrOptions } from 'packages/types'
+import {
+  IReportData,
+  IOptions,
+  ICustomErrOptions,
+  IPerformanceOptions
+} from '../types'
 import { setConfig, config } from './src/config'
 import { catchError, errorCapture } from './src/catch-error'
 import { getPV } from './src/collect-pv'
+import { performancePlugin } from '../performance/index'
 
 class Monitor {
   private options
   private config
-  // private customErrOptions
 
   constructor(options: IOptions) {
     this.options = options
     const { config } = this.options
     this.config = config //基础配置
-    // this.customErrOptions = customErrOptions //自定义错误上报
   }
 
   init() {
@@ -23,6 +27,10 @@ class Monitor {
 
   handleCustomError(options: ICustomErrOptions) {
     errorCapture(options)
+  }
+
+  observePerformance(options: IPerformanceOptions) {
+    performancePlugin(options)
   }
 }
 

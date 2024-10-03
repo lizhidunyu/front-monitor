@@ -1,3 +1,5 @@
+import { SubType } from '../common'
+
 // 调用Monitor传入的配置信息
 export interface IOptions {
   config: IConfig // 基本配置信息
@@ -23,11 +25,6 @@ export interface ICustomErrOptions {
   error?: any
   subType?: SubType
 }
-
-// 定义一级类型
-export type Type = 'business' | 'error'
-// 定义二级子类型
-export type SubType = 'jsError' | 'promiseError' | 'resourceError' | 'pv'
 
 /**上报错误数据**/
 export interface IWindowErrorData {
@@ -56,21 +53,4 @@ export interface IResourceErrorData {
 // 上报PV
 export interface IPVData {
   subType: 'pv'
-}
-
-// 上报数据的data类型
-export type IReportData = IWindowErrorData &
-  IPromiseErrorData &
-  IResourceErrorData &
-  ICustomErrOptions
-
-// 上报数据的全部配置信息
-export interface IReportConfig {
-  id?: string
-  data?: IReportData
-  config?: IConfig
-  type?: Type
-  currentTime?: string | number
-  currentPage?: string
-  ua?: string
 }

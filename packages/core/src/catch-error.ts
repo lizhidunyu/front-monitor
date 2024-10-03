@@ -2,7 +2,7 @@
  * @description: 采集项目中的错误异常上报
  */
 
-import { lazyReport } from './report'
+import { lazyReport } from '../../utils'
 import {
   ICustomErrOptions,
   IReportData,
