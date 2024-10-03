@@ -1,1 +1,1 @@
-export { IBaseConfig } from './base/index'
+export { IConfig, IReportData, IOptions, ICustomErrOptions } from './base/index'
