@@ -3,7 +3,13 @@
  */
 
 import { lazyReport } from './report'
-import { ICustomErrOptions, IReportData } from '../../types'
+import {
+  ICustomErrOptions,
+  IReportData,
+  IPromiseErrorData,
+  IWindowErrorData,
+  IResourceErrorData
+} from '../../types'
 
 export function catchError() {
   // 1.全局错误捕获
@@ -14,26 +20,26 @@ export function catchError() {
       originError.call(window, msg, url, line, column, error)
     }
     // 错误信息进行上报
-    const reportData: IReportData = {
+    const reportData: IWindowErrorData = {
       message: msg,
       file: url,
       row: line,
       col: column,
       stack: error?.stack,
       error,
-      errorType: 'jsError'
+      subType: 'jsError'
     }
-    lazyReport('error', reportData)
+    lazyReport('error', reportData as IReportData)
   }
 
   // 2.promise error 异步错误
   window.addEventListener('unhandledrejection', (error) => {
-    const reportData: IReportData = {
+    const reportData: IPromiseErrorData = {
       message: error.reason,
       error,
-      errorType: 'promiseError'
+      subType: 'promiseError'
     }
-    lazyReport('error', reportData)
+    lazyReport('error', reportData as IReportData)
   })
 
   // 3.resource error 资源加载错误
@@ -48,14 +54,14 @@ export function catchError() {
       if (!isElementType) {
         return
       }
-      const reportData: IReportData = {
+      const reportData: IResourceErrorData = {
         message: `加载${target?.tagName}资源错误`,
         file:
           'src' in target ? target?.src : 'href' in target ? target?.href : '',
         html: target?.outerHTML,
-        errorType: 'resourceError'
+        subType: 'resourceError'
       }
-      lazyReport('error', reportData)
+      lazyReport('error', reportData as IReportData)
     },
     true
   )
@@ -65,10 +71,11 @@ export function catchError() {
 export function errorCapture(options: ICustomErrOptions) {
   console.log(options)
 
-  const { error, message, errorType } = options
-  lazyReport('error', {
+  const { error, message, subType } = options
+  const reportData: ICustomErrOptions = {
     message,
     error,
-    errorType
-  })
+    subType
+  }
+  lazyReport('error', reportData as IReportData)
 }

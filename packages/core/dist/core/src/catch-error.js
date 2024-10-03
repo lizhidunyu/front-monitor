@@ -22,7 +22,7 @@ function catchError() {
             col: column,
             stack: error === null || error === void 0 ? void 0 : error.stack,
             error,
-            errorType: 'jsError'
+            subType: 'jsError'
         };
         (0, report_1.lazyReport)('error', reportData);
     };
@@ -31,7 +31,7 @@ function catchError() {
         const reportData = {
             message: error.reason,
             error,
-            errorType: 'promiseError'
+            subType: 'promiseError'
         };
         (0, report_1.lazyReport)('error', reportData);
     });
@@ -48,7 +48,7 @@ function catchError() {
             message: `加载${target === null || target === void 0 ? void 0 : target.tagName}资源错误`,
             file: 'src' in target ? target === null || target === void 0 ? void 0 : target.src : 'href' in target ? target === null || target === void 0 ? void 0 : target.href : '',
             html: target === null || target === void 0 ? void 0 : target.outerHTML,
-            errorType: 'resourceError'
+            subType: 'resourceError'
         };
         (0, report_1.lazyReport)('error', reportData);
     }, true);
@@ -56,10 +56,11 @@ function catchError() {
 // 4.手动捕获错误
 function errorCapture(options) {
     console.log(options);
-    const { error, message, errorType } = options;
-    (0, report_1.lazyReport)('error', {
+    const { error, message, subType } = options;
+    const reportData = {
         message,
         error,
-        errorType
-    });
+        subType
+    };
+    (0, report_1.lazyReport)('error', reportData);
 }

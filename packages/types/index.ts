@@ -1,1 +1,13 @@
-export { IConfig, IReportData, IOptions, ICustomErrOptions } from './base/index'
+export {
+  Type,
+  SubType,
+  IConfig,
+  IOptions,
+  IWindowErrorData,
+  IPromiseErrorData,
+  IResourceErrorData,
+  ICustomErrOptions,
+  IReportData,
+  IReportConfig,
+  IPVData
+} from './core/index'

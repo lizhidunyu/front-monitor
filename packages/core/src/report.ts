@@ -2,7 +2,7 @@
  * @description: 上报数据信息
  */
 
-import { IReportData } from '../../types'
+import { IReportConfig, IReportData, Type } from '../../types'
 import {
   generateUniqueId,
   isSupportSendBeacon,
@@ -11,7 +11,6 @@ import {
 } from '../../utils'
 import { config } from './config'
 import { CacheData } from './cache-data'
-// TODO:可以设置不同的类型，不同的类型对应不同的枚举info
 
 // 1.缓存数据，延迟上报 | 数据量达到一定大小上报
 let timer: any = null
@@ -42,13 +41,13 @@ export const lazyReport = (type: string, data: IReportData, timeout = 3000) => {
 }
 
 // 2.上报数据
-export const reportData = (type: string, data: IReportData) => {
+export const reportData = (type: Type, data: IReportData) => {
   if (!config.url) {
     console.error('请设置上传 url 地址')
   }
-  const reportParams = {
+  const reportParams: IReportConfig = {
     id: generateUniqueId(type, new Date().getTime()), //唯一id
-    ...config,
+    config: { ...config },
     type,
     data,
     currentTime: new Date().getTime(), // 时间戳

@@ -7,7 +7,6 @@ exports.handleReportData = exports.handleReportTime = exports.reportData = expor
 const utils_1 = require("../../utils");
 const config_1 = require("./config");
 const cache_data_1 = require("./cache-data");
-// TODO:可以设置不同的类型，不同的类型对应不同的枚举info
 // 1.缓存数据，延迟上报 | 数据量达到一定大小上报
 let timer = null;
 let cacheStore = new cache_data_1.CacheData();
@@ -38,9 +37,15 @@ const reportData = (type, data) => {
     if (!config_1.config.url) {
         console.error('请设置上传 url 地址');
     }
-    const reportParams = Object.assign(Object.assign({ id: (0, utils_1.generateUniqueId)(type, new Date().getTime()) }, config_1.config), { type,
-        data, currentTime: new Date().getTime(), currentPage: window.location.href, ua: navigator.userAgent //ua信息
-     });
+    const reportParams = {
+        id: (0, utils_1.generateUniqueId)(type, new Date().getTime()), //唯一id
+        config: Object.assign({}, config_1.config),
+        type,
+        data,
+        currentTime: new Date().getTime(), // 时间戳
+        currentPage: window.location.href, // 当前页面
+        ua: navigator.userAgent //ua信息
+    };
     const reportParamsStr = JSON.stringify(reportParams);
     (0, exports.handleReportTime)(reportParamsStr, config_1.config.reportConfig);
 };
