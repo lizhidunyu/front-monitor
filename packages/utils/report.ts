@@ -45,7 +45,6 @@ export const reportData = (type: Type, data: IReportData) => {
   if (!config.url) {
     console.error('请设置上传 url 地址')
   }
-  console.log('config:', config)
 
   const reportParams: IReportConfig = {
     id: generateUniqueId(type, new Date().getTime()), //唯一id
