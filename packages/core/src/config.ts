@@ -4,6 +4,7 @@ const config: IConfig = {
   url: '',
   appId: '',
   userId: '',
+  autoTracker: false, //是否使用无痕埋点
   reportConfig: {
     isImgReport: false, // 是否采用图片上报
     isImmediate: false // 是否延迟上报

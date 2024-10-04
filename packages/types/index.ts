@@ -15,3 +15,9 @@ export {
   IPerformanceOptions,
   LayoutShift
 } from './performance'
+
+export {
+  IClickEventData,
+  ICustomClickOptions,
+  IPageChangeData
+} from './behavior'

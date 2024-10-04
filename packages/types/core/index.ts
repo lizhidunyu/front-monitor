@@ -10,6 +10,7 @@ export interface IConfig {
   url: string | URL
   appId?: string
   userId?: string
+  autoTracker: boolean
   reportConfig?: {
     isImgReport?: Boolean // 是否采用图片上报
     isImmediate?: Boolean // 是否延迟上报

@@ -6,9 +6,10 @@ import {
   ICustomErrOptions
 } from '../core'
 import { IPerformanceData } from '../performance'
+import { IClickEventData, CustomType } from '../behavior'
 
 // 定义一级类型
-export type Type = 'business' | 'error' | 'performance'
+export type Type = 'business' | 'error' | 'performance' | 'behavior'
 // 定义二级子类型
 export type SubType =
   | 'jsError'
@@ -22,13 +23,17 @@ export type SubType =
   | 'FID'
   | 'CLS'
   | 'longTask'
+  | 'click'
+  | 'pageChange'
+  | CustomType
 
 // 上报数据的data类型
 export type IReportData = IWindowErrorData &
   IPromiseErrorData &
   IResourceErrorData &
   ICustomErrOptions &
-  IPerformanceData
+  IPerformanceData &
+  IClickEventData
 
 // 上报数据的全部配置信息
 export interface IReportConfig {
