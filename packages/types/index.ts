@@ -10,4 +10,8 @@ export {
   IPVData
 } from './core'
 
-export { ITTFBData, IPerformanceOptions } from './performance'
+export {
+  IPerformanceData,
+  IPerformanceOptions,
+  LayoutShift
+} from './performance'

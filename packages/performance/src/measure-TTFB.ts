@@ -1,8 +1,8 @@
-import { IReportData, ITTFBData } from '../../types'
+import { IReportData, IPerformanceData } from '../../types'
 import { lazyReport } from '../../utils'
 import { TTFB_RANGE } from '../constants'
 
-export const calcuTTFB = () => {
+export const measureTTFB = () => {
   const entryHandler = (list: PerformanceObserverEntryList) => {
     const entries: PerformanceEntry[] = list.getEntries()
     let ttfbValue: number | string
@@ -11,8 +11,9 @@ export const calcuTTFB = () => {
       if (entry.entryType === 'navigation') {
         const navigationEntry = entry as PerformanceNavigationTiming
         ttfbValue = navigationEntry.responseStart - navigationEntry.requestStart
+        observer.disconnect()
 
-        const reportData: ITTFBData = {
+        const reportData: IPerformanceData = {
           subType: 'TTFB',
           value: ttfbValue,
           rating:
@@ -20,7 +21,7 @@ export const calcuTTFB = () => {
               ? 'good'
               : ttfbValue <= TTFB_RANGE.ACCEPTED
                 ? 'normal'
-                : 'bad'
+                : 'poor'
         }
         lazyReport('performance', reportData as IReportData)
       }

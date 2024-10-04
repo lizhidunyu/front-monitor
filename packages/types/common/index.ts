@@ -5,7 +5,7 @@ import {
   IResourceErrorData,
   ICustomErrOptions
 } from '../core'
-import { ITTFBData } from '../performance'
+import { IPerformanceData } from '../performance'
 
 // 定义一级类型
 export type Type = 'business' | 'error' | 'performance'
@@ -16,13 +16,19 @@ export type SubType =
   | 'resourceError'
   | 'pv'
   | 'TTFB'
+  | 'FP'
+  | 'FCP'
+  | 'LCP'
+  | 'FID'
+  | 'CLS'
+  | 'longTask'
 
 // 上报数据的data类型
 export type IReportData = IWindowErrorData &
   IPromiseErrorData &
   IResourceErrorData &
   ICustomErrOptions &
-  ITTFBData
+  IPerformanceData
 
 // 上报数据的全部配置信息
 export interface IReportConfig {

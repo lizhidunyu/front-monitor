@@ -1,11 +1,10 @@
-import { calcuTTFB } from './src'
+import { measureTTFB } from './src'
 
 export function performancePlugin(options: any) {
   for (const key in options) {
     const val = options[key]
     if (val) {
-      calcuTTFB()
-      console.log('213123')
+      measureTTFB()
 
       //   const functionName = `calcu${key}`
       //   functionName()
