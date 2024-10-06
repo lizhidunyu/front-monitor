@@ -1,5 +1,5 @@
 {
-  "name": "monitor-behavior",
+  "name": "@front-monitor/behavior",
   "version": "1.0.0",
   "description": "",
   "main": "dist/behavior/index.js",

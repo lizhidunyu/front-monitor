@@ -1,8 +1,8 @@
 {
-  "name": "@front-monitor/performance",
+  "name": "@front-monitor/core",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/performance/index.js",
+  "main": "dist/core/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc"
