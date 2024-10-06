@@ -30,3 +30,13 @@ monitor.init();
 // 引入性能监控插件，支持自定义性能监控列表
 monitor.observePerformance({ TTFB: true });
 ```
+
+### 体验
+
+```
+// test/demo  启动项目
+npm run start
+
+// test/server 上报数据
+npm run serve
+```

@@ -1,0 +1,6 @@
+# 在特定目录中标准化为 LF 换行符  
+*/  
+* text=auto eol=lf  
+  
+# 或者，为特定文件类型指定换行符  
+*.ts text=auto eol=lf

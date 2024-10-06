@@ -1,18 +1,17 @@
 import React from 'react'
 import { Button } from 'antd'
 import Monitor from '@front-monitor/core'
-import { performancePlugin } from '@front-monitor/performance'
-
+// import { performancePlugin } from '@front-monitor/performance'
+console.log(123)
 const monitor = new Monitor({
   config: {
     userId: '123',
-    url: 'http://localhost:3000'
+    url: 'http://localhost:8000/report'
     // reportConfig: { isImgReport: true },
   }
 })
 
 monitor.init()
-
 monitor.observePerformance({ TTFB: true })
 
 const App = () => (

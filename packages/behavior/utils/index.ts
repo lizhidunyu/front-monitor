@@ -29,26 +29,26 @@ export const getPathTo = (element: HTMLElement): any => {
 }
 
 /** 重写pushState和popState方法 **/
-export const modifyHistoryEvent = (name: string) => {
-  const originMethod = (window.history as any)[name]
-  if (name === 'replaceState') {
-    // @ts-ignore
-    const { current } = event
-    const pathName = location.pathname
-    if (current === pathName) {
-      // @ts-ignore
-      let res = originMethod.apply(this, arguments)
-      return res
-    }
-  }
-  // @ts-ignore
-  let res = originMethod.apply(this, arguments)
-  let e = new Event(name)
-  // @ts-ignore
-  e.arguments = arguments
-  window.dispatchEvent(e)
-  return res
-}
+// export const modifyHistoryEvent = (name: string) => {
+//   const originMethod = (window.history as any)[name]
+//   if (name === 'replaceState') {
+//     // @ts-ignore
+//     const { current } = event
+//     const pathName = location.pathname
+//     if (current === pathName) {
+//       // @ts-ignore
+//       let res = originMethod.apply(this, arguments)
+//       return res
+//     }
+//   }
+//   // @ts-ignore
+//   let res = originMethod.apply(this, arguments)
+//   let e = new Event(name)
+//   // @ts-ignore
+//   e.arguments = arguments
+//   window.dispatchEvent(e)
+//   return res
+// }
 
-window.history.pushState = modifyHistoryEvent('pushState')
-window.history.replaceState = modifyHistoryEvent('replaceState')
+// window.history.pushState = modifyHistoryEvent('pushState')
+// window.history.replaceState = modifyHistoryEvent('replaceState')
