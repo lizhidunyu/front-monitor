@@ -12,7 +12,7 @@ const monitor = new Monitor({
   config: {
     userId: "123",
     appId:'',
-    url: "http://localhost:8000/login",
+    url: "http://localhost:3000",
     autoTracker: false // 是否使用无痕埋点, 默认是false
     reportConfig: // 上报方式配置
       {
