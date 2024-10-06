@@ -1,11 +1,14 @@
 ### 安装
 
 ```
-import Monitor from "@front-monitor/core"; //核心模块
-import { performancePlugin } from "@front-monitor/performance"; //性能监控模块
+npm i @front-monitor/core
+npm i @front-monitor/performance
 ```
 
 ### 引入
+
+import Monitor from "@front-monitor/core"; //核心模块
+import { performancePlugin } from "@front-monitor/performance"; //性能监控模块
 
 ```
 const monitor = new Monitor({
