@@ -1,7 +1,7 @@
 import { IConfig } from '../../types'
 
 const config: IConfig = {
-  url: '',
+  url: 'http://localhost:8000/report',
   appId: '',
   userId: '',
   autoTracker: false, //是否使用无痕埋点

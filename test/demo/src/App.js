@@ -1,6 +1,7 @@
 import React from 'react'
 import { Button } from 'antd'
 import Monitor from '@front-monitor/core'
+import { PerformancePlugin } from '@front-monitor/performance'
 // import { performancePlugin } from '@front-monitor/performance'
 console.log(123)
 const monitor = new Monitor({
@@ -12,7 +13,16 @@ const monitor = new Monitor({
 })
 
 monitor.init()
-monitor.observePerformance({ TTFB: true })
+new PerformancePlugin({
+  // TTFB: true,
+  // CLS: true,
+  // FCP: true,
+  // FID: true,
+  // FP: true,
+  // LCP: true,
+  // longTask: true,
+  // FMP: true
+})
 
 const App = () => (
   <div className="App">

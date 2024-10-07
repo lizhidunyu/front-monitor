@@ -1,22 +1,56 @@
-import { measureTTFB } from './src'
+import { IPerformanceOptions } from '../types'
+import {
+  measureTTFB,
+  measureCLS,
+  measureFCP,
+  measureFID,
+  measureFP,
+  measureLCP,
+  measureLongTask,
+  FMPTiming
+} from './src'
 
-export function performancePlugin(options: any) {
-  for (const key in options) {
-    const val = options[key]
-    if (val) {
+export class PerformancePlugin {
+  private options: IPerformanceOptions
+  constructor(options: IPerformanceOptions) {
+    this.options = options
+    this.install(this.options)
+  }
+
+  install(options: IPerformanceOptions) {
+    const {
+      TTFB = true,
+      CLS = true,
+      FCP = true,
+      FID = true,
+      FP = true,
+      LCP = true,
+      longTask = true,
+      FMP = true
+    } = options
+    if (TTFB) {
       measureTTFB()
-
-      //   const functionName = `calcu${key}`
-      //   functionName()
-      //   // @ts-ignore
-      // (typeof performanceLists[functionName] === 'function') {
-      //     // @ts-ignore
-      //     performanceLists[functionName]()
-      //   } else   if {
-      //     console.warn(
-      //       `Function ${functionName} does not exist in performanceLists`
-      //     )
-      //   }
+    }
+    if (CLS) {
+      measureCLS()
+    }
+    if (FCP) {
+      measureFCP()
+    }
+    if (FID) {
+      measureFID()
+    }
+    if (FP) {
+      measureFP()
+    }
+    if (LCP) {
+      measureLCP()
+    }
+    if (longTask) {
+      measureLongTask()
+    }
+    if (FMP) {
+      new FMPTiming().fmpTiming
     }
   }
 }

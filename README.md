@@ -28,7 +28,17 @@ const monitor = new Monitor({
 // 初始化
 monitor.init();
 // 引入性能监控插件，支持自定义性能监控列表
-monitor.observePerformance({ TTFB: true });
+new PerformancePlugin({
+  // 默认参数
+  // TTFB: true,
+  // CLS: true,
+  // FCP: true,
+  // FID: true,
+  // FP: true,
+  // LCP: true,
+  // longTask: true,
+  // FMP: true
+})
 ```
 
 ### 体验

@@ -9,6 +9,8 @@ import {
   LIMIT,
   DELAY
 } from '../constants'
+import { lazyReport } from '../../utils'
+import { IPerformanceData, IReportData } from '../../types'
 
 export class FMPTiming {
   private statusCollector: any[]
@@ -16,6 +18,7 @@ export class FMPTiming {
   private observer: MutationObserver | null
   private callbackCount: number
   private resourceMap: Record<string, any> = {}
+  public fmpTiming: Number = 0
 
   constructor() {
     this.statusCollector = []
@@ -23,7 +26,7 @@ export class FMPTiming {
     this.observer = null
     this.callbackCount = 1
     this.resourceMap = {}
-
+    this.fmpTiming = 0
     this.initObserver()
   }
 
@@ -128,12 +131,22 @@ export class FMPTiming {
         this.initResourceMap()
         let resultSet = this.filterTheResultSet(topScoreElement.elementSet)
         let fmpTiming = this.calResult(resultSet)
+        this.fmpTiming = fmpTiming
+        this.report(this.fmpTiming)
       } else {
         setTimeout(() => {
           this.calFinallScore()
         }, DELAY)
       }
     }
+  }
+
+  report(data: Number) {
+    const reportData: IPerformanceData = {
+      subType: 'FMP',
+      value: data as number
+    }
+    lazyReport('performance', reportData as IReportData)
   }
 
   filterTheResultSet(elementSet: any[]) {
