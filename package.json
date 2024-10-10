@@ -41,6 +41,9 @@
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "^8.8.0",
     "@typescript-eslint/parser": "^8.8.0",
+    "base-64": "^1.0.0",
+    "pako": "^2.1.0",
+    "rrweb": "^2.0.0-alpha.4",
     "uuid": "^10.0.0"
   }
 }

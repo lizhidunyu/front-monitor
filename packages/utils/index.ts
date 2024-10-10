@@ -6,3 +6,4 @@ export {
   originalOpen,
   originalSend
 } from './core'
+export { _Monitor, getGlobalMonitor } from './global'

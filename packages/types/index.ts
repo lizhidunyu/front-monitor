@@ -21,3 +21,5 @@ export {
   ICustomClickOptions,
   IPageChangeData
 } from './behavior'
+
+export { IRecordData } from './record'
