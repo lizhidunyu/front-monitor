@@ -6,7 +6,8 @@ export function getGlobalMonitor() {
     hasError: false,
     vue: null,
     react: null,
-    recordScreenId: null
+    recordScreenId: null,
+    loopTimer: String || Number
   }
   return (window as unknown as any)._Monitor
 }

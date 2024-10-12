@@ -5,6 +5,8 @@ const config: IConfig = {
   appId: '',
   userId: '',
   autoTracker: false, //是否使用无痕埋点
+  skeletonProject: false, // 是否属于骨架屏
+  whiteBoxElements: [], // 白屏检测的容器列表
   reportConfig: {
     isImgReport: false, // 是否采用图片上报
     isImmediate: false // 是否延迟上报

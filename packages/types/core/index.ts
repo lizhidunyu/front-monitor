@@ -11,6 +11,8 @@ export interface IConfig {
   appId?: string
   userId?: string
   autoTracker: boolean
+  skeletonProject?: boolean
+  whiteBoxElements?: string[]
   reportConfig?: {
     isImgReport?: Boolean // 是否采用图片上报
     isImmediate?: Boolean // 是否延迟上报
