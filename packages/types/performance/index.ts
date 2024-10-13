@@ -4,6 +4,7 @@ export interface IPerformanceData {
   subType?: SubType
   value?: string | number | PerformanceEntry
   rating?: string
+  resourceList?: any[]
 }
 
 // 用户自定义需要上报的性能指标

@@ -7,6 +7,7 @@ import { measureFID } from './measure-FID'
 import { FMPTiming } from './measure-FMP'
 import { measureLongTask } from './measure-long-task'
 import { openWhiteScreen } from './observe-whiteScreen'
+import { reportResource } from './observe-load'
 import { TYPES } from '../../../constants'
 
 export const getWebVitals = (performanceConfig: any, lazyReport: any) => {
@@ -50,6 +51,9 @@ export const getWebVitals = (performanceConfig: any, lazyReport: any) => {
             '#root'
           ]
         })
+        break
+      case 'resourceList':
+        reportResource((res) => lazyReport(TYPES.PERFORMANCE, res))
         break
     }
   })

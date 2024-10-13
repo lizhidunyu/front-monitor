@@ -24,7 +24,8 @@ export const PERFORMANCE_TYPE = {
   LCP: 'LCP',
   FID: 'FID',
   CLS: 'CLS',
-  LONG_TASK: 'longTask'
+  LONG_TASK: 'longTask',
+  RESOURCE_LIST: 'resourceList'
 }
 
 export const BEHAVIOR_TYPE = {

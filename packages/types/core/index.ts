@@ -32,7 +32,8 @@ export interface IPerformancePlugin {
   LCP?: boolean
   longTask?: boolean
   FMP?: boolean
-  WHITESCHEEN?: Boolean
+  whiteScreen?: Boolean
+  resourceList?: Boolean
   skeletonProject?: boolean // 是否是骨架屏项目
   whiteBoxElements?: string[] //  白屏检测的容器列表
 }
