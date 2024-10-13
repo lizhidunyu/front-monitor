@@ -1,7 +1,7 @@
-import { IReportData, IPerformanceData } from '../../types'
-import { lazyReport } from '../../utils'
+import { IReportData, IPerformanceData, Callback } from '../../../types'
+// import { lazyReport } from '../utils'
 
-export const measureFP = () => {
+export const measureFP = (callback: Callback) => {
   const entryHandler = (list: PerformanceObserverEntryList) => {
     const entries: PerformanceEntry[] = list.getEntries()
     let fpValue: number | string
@@ -15,7 +15,8 @@ export const measureFP = () => {
           subType: 'FP',
           value: fpValue
         }
-        lazyReport('performance', reportData as IReportData)
+        // lazyReport('performance', reportData as IReportData)
+        callback(reportData)
       }
     })
   }

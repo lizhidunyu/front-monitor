@@ -1,8 +1,9 @@
-import { IReportData, IPerformanceData } from '../../types'
-import { lazyReport } from '../../utils'
+import { Callback } from '@/types'
+import { IReportData, IPerformanceData } from '../../../types'
+// import { lazyReport } from '../utils'
 import { TTFB_RANGE } from '../constants'
 
-export const measureTTFB = () => {
+export const measureTTFB = (callback: Callback) => {
   const entryHandler = (list: PerformanceObserverEntryList) => {
     const entries: PerformanceEntry[] = list.getEntries()
     let ttfbValue: number | string
@@ -23,7 +24,8 @@ export const measureTTFB = () => {
                 ? 'normal'
                 : 'poor'
         }
-        lazyReport('performance', reportData as IReportData)
+        // lazyReport('performance', reportData as IReportData)
+        callback(reportData)
       }
     })
   }

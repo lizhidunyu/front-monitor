@@ -2,14 +2,14 @@
  * @description: 采集项目中的错误异常上报
  */
 
-import { lazyReport } from '../../utils'
+import { lazyReport } from '../../../utils'
 import {
   ICustomErrOptions,
   IReportData,
   IPromiseErrorData,
   IWindowErrorData,
   IResourceErrorData
-} from '../../types'
+} from '../../../types'
 
 export function catchError() {
   // 1.全局错误捕获

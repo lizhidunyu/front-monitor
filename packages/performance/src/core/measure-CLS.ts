@@ -1,8 +1,13 @@
-import { IReportData, IPerformanceData, LayoutShift } from '../../types'
-import { lazyReport } from '../../utils'
+import {
+  IReportData,
+  IPerformanceData,
+  LayoutShift,
+  Callback
+} from '../../../types'
+import { lazyReport } from '../../../utils'
 import { STANDARD_CLS } from '../constants'
 
-export function measureCLS() {
+export function measureCLS(callback: Callback) {
   const entryHandler = (list: PerformanceObserverEntryList) => {
     let clsValue = 0
     const entries: PerformanceEntry[] = list.getEntries()
@@ -18,7 +23,8 @@ export function measureCLS() {
       value: clsValue,
       rating: clsValue > STANDARD_CLS ? 'poor' : 'good'
     }
-    lazyReport('performance', reportData as IReportData)
+    // lazyReport('performance', reportData as IReportData)
+    callback(reportData)
   }
   const observer = new PerformanceObserver(entryHandler)
   observer.observe({ type: 'layout-shift', buffered: true })

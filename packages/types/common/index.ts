@@ -27,6 +27,11 @@ export type SubType =
   | (typeof RECORD_TYPE)[keyof typeof RECORD_TYPE]
   | CustomType
 
+// 上报数据的回调函数
+export interface Callback {
+  (...args: any[]): any
+}
+
 // 上报数据的data类型
 export type IReportData = IWindowErrorData &
   IPromiseErrorData &

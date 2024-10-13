@@ -1,8 +1,9 @@
-import { IReportData, IPerformanceData } from '../../types'
-import { lazyReport } from '../../utils'
+import { IReportData, IPerformanceData } from '../../../types'
+// import { lazyReport } from '../utils'
 import { STANDARD_FCP } from '../constants'
+import { Callback } from '@/types'
 
-export const measureFCP = () => {
+export const measureFCP = (callback: Callback) => {
   const entryHandler = (list: PerformanceObserverEntryList) => {
     const entries: PerformanceEntry[] = list.getEntries()
     let fcpValue: number | string
@@ -17,7 +18,8 @@ export const measureFCP = () => {
           value: fcpValue,
           rating: fcpValue > STANDARD_FCP ? 'poor' : 'good'
         }
-        lazyReport('performance', reportData as IReportData)
+        // lazyReport('performance', reportData as IReportData)
+        callback(reportData)
       }
     })
   }

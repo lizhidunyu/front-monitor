@@ -3,12 +3,13 @@ import {
   ICustomErrOptions,
   IPerformanceOptions,
   ICustomClickOptions
-} from '../types'
-import { setConfig, config } from './src/config'
-import { catchError, errorCapture } from './src/catch-error'
-import { getPV } from './src/collect-pv'
+} from '../../types'
+import { setConfig, config } from './core/config'
+import { catchError, errorCapture } from './core/catch-error'
+import { getPV } from './core/collect-pv'
+import { lazyReport, CacheEvents } from '../../utils'
 // import { performancePlugin } from '../performance/index'
-import { autoTrackerClick, customTrackerClick } from '../behavior/index'
+import { autoTrackerClick, customTrackerClick } from '../../behavior/index'
 
 class Monitor {
   private options
@@ -36,14 +37,15 @@ class Monitor {
     errorCapture(options)
   }
 
-  // 自定义性能监控列表
-  // observePerformance(options: IPerformanceOptions) {
-  //   performancePlugin(options)
-  // }
-
   // 手动埋点
   tracker(options: ICustomClickOptions) {
     customTrackerClick(options)
+  }
+
+  // 注册插件（性能插件/录屏插件）
+  use(plugin: any, options: IOptions) {
+    const instance = new plugin(options)
+    instance.core({ lazyReport, CacheEvents, options })
   }
 }
 

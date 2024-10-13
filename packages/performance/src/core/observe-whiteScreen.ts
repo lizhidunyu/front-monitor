@@ -1,17 +1,16 @@
-import { IReportData, IConfig } from '../../types'
-import { _Monitor, lazyReport } from '../../utils'
-import { config } from '../../core/src/config'
+import { IReportData, IConfig, Callback, STATUS_CODE } from '../../../types'
+import { _Monitor, lazyReport } from '../../../utils'
+// import { config } from '../../core/src/config'
 
-export function openWhiteScreen({
-  skeletonProject,
-  whiteBoxElements
-}: IConfig) {
+export function openWhiteScreen(
+  callback: Callback,
+  { skeletonProject, whiteBoxElements }: any
+) {
   let _whiteLoopNum = 0
   const _skeletonInitList: any = [] // 存储初次采样点
   let _skeletonNowList: any = [] // 存储当前采样点
 
   //项目有骨架屏
-  // TODO: 时机？
   if (skeletonProject) {
     if (document.readyState != 'complete') {
       idleCallback()
@@ -56,7 +55,7 @@ export function openWhiteScreen({
   // 采样对比
   function sampling() {
     let emptyPoints = 0
-    for (let i = 0; i <= 9; i++) {
+    for (let i = 1; i <= 9; i++) {
       const xElements = document.elementsFromPoint(
         (window.innerWidth * i) / 10,
         window.innerHeight / 2
@@ -71,11 +70,11 @@ export function openWhiteScreen({
         if (isContainer(yElements[0] as HTMLElement)) emptyPoints++
       }
     }
+    // console.log('_skeletonInitList', _skeletonInitList, _skeletonNowList);
 
     // 页面正常渲染，停止轮训
-    if (emptyPoints !== 17) {
+    if (emptyPoints != 17) {
       if (skeletonProject) {
-        //骨架屏
         // 第一次不比较
         if (!_whiteLoopNum) return openWhiteLoop()
         // 比较前后dom是否一致
@@ -85,16 +84,15 @@ export function openWhiteScreen({
           })
       }
       if (_Monitor.loopTimer) {
-        clearTimeout(_Monitor.loopTimer)
-        _Monitor.loopTimer = null
+        clearTimeout(_Monitor._loopTimer)
+        _Monitor._loopTimer = null
       }
     } else {
       // 开启轮训
-      if (!_Monitor.loopTimer) {
+      if (!_Monitor._loopTimer) {
         openWhiteLoop()
       }
     }
-
     // 17个点都是容器节点算作白屏
     callback({
       status: emptyPoints == 17 ? STATUS_CODE.ERROR : STATUS_CODE.OK
@@ -104,7 +102,7 @@ export function openWhiteScreen({
   // 开启白屏轮训
   function openWhiteLoop(): void {
     if (_Monitor.loopTimer) return
-    _Monitor._loopTimer = setInterval(() => {
+    _Monitor.loopTimer = setInterval(() => {
       if (skeletonProject) {
         _whiteLoopNum++
         _skeletonNowList = []
@@ -112,17 +110,17 @@ export function openWhiteScreen({
       idleCallback()
     }, 1000)
   }
-}
 
-function idleCallback() {
-  if ('requestIdleCallback' in window) {
-    requestIdleCallback((deadline) => {
-      // timeRemaining：表示当前空闲时间的剩余时间
-      if (deadline.timeRemaining() > 0) {
-        sampling()
-      }
-    })
-  } else {
-    sampling()
+  function idleCallback() {
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback((deadline) => {
+        // timeRemaining：表示当前空闲时间的剩余时间
+        if (deadline.timeRemaining() > 0) {
+          sampling()
+        }
+      })
+    } else {
+      sampling()
+    }
   }
 }

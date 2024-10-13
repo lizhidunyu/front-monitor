@@ -1,4 +1,4 @@
-import { IConfig } from '../../types'
+import { IConfig } from '../../../types'
 
 const config: IConfig = {
   url: 'http://localhost:8000/report',

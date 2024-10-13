@@ -1,8 +1,9 @@
-export { Type, SubType, IReportData, IReportConfig } from './common'
+export { Type, SubType, IReportData, IReportConfig, Callback } from './common'
 
 export {
   IConfig,
   IOptions,
+  IPerformancePlugin,
   IWindowErrorData,
   IPromiseErrorData,
   IResourceErrorData,
@@ -12,8 +13,9 @@ export {
 
 export {
   IPerformanceData,
-  IPerformanceOptions,
-  LayoutShift
+  // IPerformanceOptions,
+  LayoutShift,
+  STATUS_CODE
 } from './performance'
 
 export {

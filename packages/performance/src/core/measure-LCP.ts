@@ -1,8 +1,9 @@
-import { IReportData, IPerformanceData } from '../../types'
-import { lazyReport } from '../../utils'
+import { IReportData, IPerformanceData } from '../../../types'
+// import { lazyReport } from '../utils'
 import { STANDARD_LCP } from '../constants'
+import { Callback } from '@/types'
 
-export const measureLCP = () => {
+export const measureLCP = (callback: Callback) => {
   const entryHandler = (list: PerformanceObserverEntryList) => {
     const entries: PerformanceEntry[] = list.getEntries()
     let lcpValue: number | string
@@ -17,7 +18,8 @@ export const measureLCP = () => {
           value: lcpValue,
           rating: lcpValue > STANDARD_LCP ? 'poor' : 'good'
         }
-        lazyReport('performance', reportData as IReportData)
+        // lazyReport('performance', reportData as IReportData)
+        callback(reportData)
       }
     })
   }

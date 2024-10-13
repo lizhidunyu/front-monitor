@@ -1,4 +1,5 @@
 export { CacheData } from './cache-data'
+export { CacheEvents } from './cache-events'
 export { lazyReport } from './report'
 export {
   generateUniqueId,

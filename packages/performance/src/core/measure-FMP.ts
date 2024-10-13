@@ -1,4 +1,4 @@
-import { getStyle } from '../utils'
+import { getStyle } from '../utils/index'
 import {
   START_TIME,
   IGNORE_TAG_SET,
@@ -9,8 +9,8 @@ import {
   LIMIT,
   DELAY
 } from '../constants'
-import { lazyReport } from '../../utils'
-import { IPerformanceData, IReportData } from '../../types'
+// import { lazyReport } from '../utils'
+import { Callback, IPerformanceData, IReportData } from '../../../types'
 
 export class FMPTiming {
   private statusCollector: any[]
@@ -18,9 +18,10 @@ export class FMPTiming {
   private observer: MutationObserver | null
   private callbackCount: number
   private resourceMap: Record<string, any> = {}
+  private callbackFn: Callback
   public fmpTiming: Number = 0
 
-  constructor() {
+  constructor(callback: Callback) {
     this.statusCollector = []
     this.flag = true
     this.observer = null
@@ -28,6 +29,7 @@ export class FMPTiming {
     this.resourceMap = {}
     this.fmpTiming = 0
     this.initObserver()
+    this.callbackFn = callback
   }
 
   // 记录在代码执行之前加载的元素的时间点，生成初次快照
@@ -146,7 +148,8 @@ export class FMPTiming {
       subType: 'FMP',
       value: data as number
     }
-    lazyReport('performance', reportData as IReportData)
+    // lazyReport('performance', reportData as IReportData)
+    this.callbackFn(reportData)
   }
 
   filterTheResultSet(elementSet: any[]) {

@@ -1,8 +1,10 @@
 import { SubType } from '../common'
 
+/*********配置信息相关**********/
 // 调用Monitor传入的配置信息
 export interface IOptions {
   config: IConfig // 基本配置信息
+  performanceConfig?: IPerformancePlugin // 性能属性配置
 }
 
 // 基本配置
@@ -10,9 +12,7 @@ export interface IConfig {
   url: string | URL
   appId?: string
   userId?: string
-  autoTracker: boolean
-  skeletonProject?: boolean
-  whiteBoxElements?: string[]
+  autoTracker?: boolean
   reportConfig?: {
     isImgReport?: Boolean // 是否采用图片上报
     isImmediate?: Boolean // 是否延迟上报
@@ -20,6 +20,21 @@ export interface IConfig {
   }
 
   [key: string]: any
+}
+
+// 性能插件配置
+export interface IPerformancePlugin {
+  TTFB?: boolean // 支持自定义监视的性能列表
+  CLS?: boolean
+  FCP?: boolean
+  FID?: boolean
+  FP?: boolean
+  LCP?: boolean
+  longTask?: boolean
+  FMP?: boolean
+  WHITESCHEEN?: Boolean
+  skeletonProject?: boolean // 是否是骨架屏项目
+  whiteBoxElements?: string[] //  白屏检测的容器列表
 }
 
 // 手动上报错误的参数
