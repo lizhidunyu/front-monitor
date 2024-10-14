@@ -1,5 +1,6 @@
+import { TYPES } from '@/constants'
 import { IClickEventData, IReportData, ICustomClickOptions } from '../../types'
-import { lazyReport } from '../../utils'
+import { reportData } from '../../utils'
 import { getPathTo } from '../utils'
 
 // 手动上报
@@ -9,7 +10,7 @@ export function customTrackerClick(options: ICustomClickOptions) {
     subType: subType,
     data: message
   }
-  lazyReport('behavior', reportData as IReportData)
+  reportData('behavior', reportData as IReportData)
 }
 
 // 自动上报
@@ -31,7 +32,7 @@ export function autoTrackerClick() {
         subType: 'click',
         data: target || getPathTo(clickDOM as HTMLElement)
       }
-      lazyReport('behavior', reportData as IReportData)
+      reportData('behavior', reportData as IReportData)
     },
     false
   )

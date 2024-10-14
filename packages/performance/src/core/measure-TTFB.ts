@@ -1,6 +1,6 @@
 import { Callback } from '@/types'
 import { IReportData, IPerformanceData } from '../../../types'
-// import { lazyReport } from '../utils'
+// import { reportData } from '../utils'
 import { TTFB_RANGE } from '../constants'
 
 export const measureTTFB = (callback: Callback) => {
@@ -24,7 +24,7 @@ export const measureTTFB = (callback: Callback) => {
                 ? 'normal'
                 : 'poor'
         }
-        // lazyReport('performance', reportData as IReportData)
+        // reportData('performance', reportData as IReportData)
         callback(reportData)
       }
     })

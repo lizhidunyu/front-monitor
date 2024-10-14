@@ -9,7 +9,8 @@ export const TYPES = {
 export const ERROR_TYPE = {
   JS_ERROR: 'jsError',
   PROMISE_ERROR: 'promiseError',
-  RESOURCE_ERROR: 'resourceError'
+  RESOURCE_ERROR: 'resourceError',
+  HTTP_ERROR: 'httpError'
 }
 
 export const BUSINESS_TYPE = {
@@ -25,7 +26,9 @@ export const PERFORMANCE_TYPE = {
   FID: 'FID',
   CLS: 'CLS',
   LONG_TASK: 'longTask',
-  RESOURCE_LIST: 'resourceList'
+  FMP: 'FMP',
+  RESOURCE_LIST: 'resourceList',
+  WHITE_SCREEN: 'whiteScreen'
 }
 
 export const BEHAVIOR_TYPE = {

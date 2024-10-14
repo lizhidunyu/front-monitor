@@ -1,11 +1,11 @@
-import { _Monitor, generateUniqueId, lazyReport } from '../../../utils'
+import { _Monitor, generateUniqueId, reportData } from '../../../utils'
 import { record } from 'rrweb'
 import pako from 'pako'
 import { Base64 } from 'js-base64'
 import { IRecordData, IReportData } from '@/types'
 import { RECORD_TYPE, TYPES } from '@/constants'
 
-export function recordScreen(lazyReport: any, recordScreenTime: number) {
+export function recordScreen(reportData: any, recordScreenTime: number) {
   let events: any[] = []
   record({
     emit(event, isCheckout) {
@@ -19,7 +19,7 @@ export function recordScreen(lazyReport: any, recordScreenTime: number) {
             time: Date.now(),
             events: zip(events)
           }
-          lazyReport(TYPES.RECORD, reportData as IReportData)
+          reportData(TYPES.RECORD, reportData as IReportData)
           events = []
           _Monitor.hasError = false
         } else {

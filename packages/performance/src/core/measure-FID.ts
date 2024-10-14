@@ -1,6 +1,6 @@
 import { STANDARD_FID } from '../constants'
 import { Callback, IPerformanceData, IReportData } from '../../../types'
-// import { lazyReport } from '../utils'
+// import { reportData } from '../utils'
 
 export const measureFID = (callback: Callback) => {
   const entryHandler = (list: PerformanceObserverEntryList) => {
@@ -18,7 +18,7 @@ export const measureFID = (callback: Callback) => {
           value: fidValue,
           rating: fidValue > STANDARD_FID ? 'poor' : 'good'
         }
-        // lazyReport('performance', reportData as IReportData)
+        // reportData('performance', reportData as IReportData)
         callback(reportData)
       }
     })

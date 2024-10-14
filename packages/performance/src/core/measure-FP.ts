@@ -1,5 +1,5 @@
 import { IReportData, IPerformanceData, Callback } from '../../../types'
-// import { lazyReport } from '../utils'
+// import { reportData } from '../utils'
 
 export const measureFP = (callback: Callback) => {
   const entryHandler = (list: PerformanceObserverEntryList) => {
@@ -15,7 +15,7 @@ export const measureFP = (callback: Callback) => {
           subType: 'FP',
           value: fpValue
         }
-        // lazyReport('performance', reportData as IReportData)
+        // reportData('performance', reportData as IReportData)
         callback(reportData)
       }
     })

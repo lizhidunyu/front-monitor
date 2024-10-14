@@ -1,5 +1,5 @@
 import { IReportData, IPerformanceData, Callback } from '../../../types'
-// import { lazyReport } from '../utils'
+// import { reportData } from '../utils'
 
 export function measureLongTask(callback: Callback) {
   const entryHandler = (list: PerformanceObserverEntryList) => {
@@ -11,7 +11,7 @@ export function measureLongTask(callback: Callback) {
         value: longTask
       }
       callback(reportData)
-      // lazyReport('performance', reportData as IReportData)
+      // reportData('performance', reportData as IReportData)
     }
   }
   const observer = new PerformanceObserver(entryHandler)

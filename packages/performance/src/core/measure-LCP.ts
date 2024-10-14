@@ -1,5 +1,5 @@
 import { IReportData, IPerformanceData } from '../../../types'
-// import { lazyReport } from '../utils'
+// import { reportData } from '../utils'
 import { STANDARD_LCP } from '../constants'
 import { Callback } from '@/types'
 
@@ -18,7 +18,7 @@ export const measureLCP = (callback: Callback) => {
           value: lcpValue,
           rating: lcpValue > STANDARD_LCP ? 'poor' : 'good'
         }
-        // lazyReport('performance', reportData as IReportData)
+        // reportData('performance', reportData as IReportData)
         callback(reportData)
       }
     })

@@ -2,7 +2,7 @@
  * @description: 采集项目中的错误异常上报
  */
 
-import { lazyReport } from '../../../utils'
+import { reportData } from '../../../utils'
 import {
   ICustomErrOptions,
   IReportData,
@@ -29,7 +29,7 @@ export function catchError() {
       error,
       subType: 'jsError'
     }
-    lazyReport('error', reportData as IReportData)
+    reportData('error', reportData as IReportData)
   }
 
   // 2.promise error 异步错误
@@ -39,7 +39,7 @@ export function catchError() {
       error,
       subType: 'promiseError'
     }
-    lazyReport('error', reportData as IReportData)
+    reportData('error', reportData as IReportData)
   })
 
   // 3.resource error 资源加载错误
@@ -61,7 +61,7 @@ export function catchError() {
         html: target?.outerHTML,
         subType: 'resourceError'
       }
-      lazyReport('error', reportData as IReportData)
+      reportData('error', reportData as IReportData)
     },
     true
   )
@@ -77,5 +77,5 @@ export function errorCapture(options: ICustomErrOptions) {
     error,
     subType
   }
-  lazyReport('error', reportData as IReportData)
+  reportData('error', reportData as IReportData)
 }

@@ -1,5 +1,5 @@
 import { IReportData, IPageChangeData } from '../../types'
-import { lazyReport } from '../../utils'
+import { reportData } from '../../utils'
 
 class PageChangeTracker {
   private beforeTime
@@ -25,7 +25,7 @@ class PageChangeTracker {
       stayTime: this.stayTime,
       page: this.beforePage
     }
-    lazyReport('behavior', reportData as IReportData)
+    reportData('behavior', reportData as IReportData)
     this.beforePage = currentPage
   }
 }

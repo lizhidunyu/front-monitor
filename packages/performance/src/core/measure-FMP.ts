@@ -9,7 +9,7 @@ import {
   LIMIT,
   DELAY
 } from '../constants'
-// import { lazyReport } from '../utils'
+// import { reportData } from '../utils'
 import { Callback, IPerformanceData, IReportData } from '../../../types'
 
 export class FMPTiming {
@@ -148,7 +148,7 @@ export class FMPTiming {
       subType: 'FMP',
       value: data as number
     }
-    // lazyReport('performance', reportData as IReportData)
+    // reportData('performance', reportData as IReportData)
     this.callbackFn(reportData)
   }
 

@@ -1,10 +1,10 @@
-export { CacheData } from './cache-data'
-export { CacheEvents } from './cache-events'
-export { lazyReport } from './report'
+export { Queue } from './src/queue'
+export { CacheEvents } from '../core/src/utils/cache-events'
+export { reportData } from './src/report'
 export {
   generateUniqueId,
   isSupportSendBeacon,
   originalOpen,
   originalSend
-} from './core'
-export { _Monitor, getGlobalMonitor } from './global'
+} from './src/core'
+export { _Monitor, getGlobalMonitor } from './src/global'

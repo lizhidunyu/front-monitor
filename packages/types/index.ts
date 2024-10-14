@@ -1,14 +1,14 @@
 export { Type, SubType, IReportData, IReportConfig, Callback } from './common'
 
 export {
-  IConfig,
   IOptions,
   IPerformancePlugin,
   IWindowErrorData,
   IPromiseErrorData,
   IResourceErrorData,
   ICustomErrOptions,
-  IPVData
+  IPVData,
+  IRecordPlugin
 } from './core'
 
 export {
@@ -24,4 +24,4 @@ export {
   IPageChangeData
 } from './behavior'
 
-export { IRecordData, ICustomRecordOptions } from './record'
+export { IRecordData } from './record'

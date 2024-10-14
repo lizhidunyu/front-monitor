@@ -10,7 +10,7 @@ import { openWhiteScreen } from './observe-whiteScreen'
 import { reportResource } from './observe-load'
 import { TYPES } from '../../../constants'
 
-export const getWebVitals = (performanceConfig: any, lazyReport: any) => {
+export const getWebVitals = (performanceConfig: any, reportData: any) => {
   const measuresToExecute = Object.keys(performanceConfig).filter(
     (key) => performanceConfig[key as keyof typeof performanceConfig] != false
   )
@@ -18,31 +18,31 @@ export const getWebVitals = (performanceConfig: any, lazyReport: any) => {
   measuresToExecute.forEach((measureKey) => {
     switch (measureKey) {
       case 'TTFB':
-        measureTTFB((res) => lazyReport(TYPES.PERFORMANCE, res))
+        measureTTFB((res) => reportData(TYPES.PERFORMANCE, res))
         break
       case 'FP':
-        measureFP((res) => lazyReport(TYPES.PERFORMANCE, res))
+        measureFP((res) => reportData(TYPES.PERFORMANCE, res))
         break
       case 'FCP':
-        measureFCP((res) => lazyReport(TYPES.PERFORMANCE, res))
+        measureFCP((res) => reportData(TYPES.PERFORMANCE, res))
         break
       case 'LCP':
-        measureLCP((res) => lazyReport(TYPES.PERFORMANCE, res))
+        measureLCP((res) => reportData(TYPES.PERFORMANCE, res))
         break
       case 'CLS':
-        measureCLS((res) => lazyReport(TYPES.PERFORMANCE, res))
+        measureCLS((res) => reportData(TYPES.PERFORMANCE, res))
         break
       case 'FID':
-        measureFID((res) => lazyReport(TYPES.PERFORMANCE, res))
+        measureFID((res) => reportData(TYPES.PERFORMANCE, res))
         break
       case 'FMP':
-        new FMPTiming((res) => lazyReport(TYPES.PERFORMANCE, res))
+        new FMPTiming((res) => reportData(TYPES.PERFORMANCE, res))
         break
       case 'longTask':
-        measureLongTask((res) => lazyReport(TYPES.PERFORMANCE, res))
+        measureLongTask((res) => reportData(TYPES.PERFORMANCE, res))
         break
       case 'whiteScreen':
-        openWhiteScreen((res) => lazyReport(TYPES.PERFORMANCE, res), {
+        openWhiteScreen((res) => reportData(TYPES.PERFORMANCE, res), {
           skeletonProject: performanceConfig.skeletonProject || 'false',
           whiteBoxElements: performanceConfig.skeletonProject || [
             'html',
@@ -53,7 +53,7 @@ export const getWebVitals = (performanceConfig: any, lazyReport: any) => {
         })
         break
       case 'resourceList':
-        reportResource((res) => lazyReport(TYPES.PERFORMANCE, res))
+        reportResource((res) => reportData(TYPES.PERFORMANCE, res))
         break
     }
   })

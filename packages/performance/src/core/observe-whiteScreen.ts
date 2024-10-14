@@ -1,6 +1,5 @@
-import { IReportData, IConfig, Callback, STATUS_CODE } from '../../../types'
-import { _Monitor, lazyReport } from '../../../utils'
-// import { config } from '../../core/src/config'
+import { Callback, STATUS_CODE } from '../../../types'
+import { _Monitor } from '../../../utils'
 
 export function openWhiteScreen(
   callback: Callback,
