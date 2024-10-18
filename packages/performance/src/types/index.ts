@@ -1,4 +1,4 @@
-import { SubType } from '../common'
+import { SubType } from '../../../utils/src/types'
 
 export interface IPerformanceData {
   subType?: SubType

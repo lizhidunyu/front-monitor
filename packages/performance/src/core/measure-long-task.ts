@@ -6,11 +6,11 @@ export function measureLongTask(callback: Callback) {
     const entries: PerformanceEntry[] = list.getEntries()
     for (const longTask of entries) {
       // 上报长任务详情
-      const reportData: IPerformanceData = {
+      const data: IPerformanceData = {
         subType: 'longTask',
         value: longTask
       }
-      callback(reportData)
+      callback(data)
       // reportData('performance', reportData as IReportData)
     }
   }

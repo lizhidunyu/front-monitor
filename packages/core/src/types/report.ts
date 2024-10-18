@@ -1,17 +1,18 @@
-import { SubType } from '../common'
-
-/*********配置信息相关**********/
+/********* 配置信息相关 **********/
 // 调用Monitor传入的配置信息
 export interface IOptions {
   url: string
   appId: string
   userId: string
-  autoTracker?: boolean
-  maxCacheEventsNum?: number
+  autoTracker?: boolean // 是否自动埋点
+  skeletonProject?: boolean // 是否属于骨架屏
+  whiteBoxElements?: any[] // 白屏检测的容器节点
+  maxCacheEventsNum?: number // 最大缓存的事件数
+  filterXhrUrlRegExp?: string // 过滤的接口请求正则
   beforePushCache?: any
-  reportConfig?: IReportConfig
-  performanceConfig?: IPerformancePlugin // 性能属性配置
-  recordConfig?: IRecordPlugin // 录屏插件配置
+  reportConfig?: IReportConfig // 上报数据相关配置（见下）
+  performanceConfig?: IPerformancePlugin // 性能属性配置（见下）
+  recordConfig?: IRecordPlugin // 录屏插件配置（见下）
   [key: string]: any
 }
 
@@ -42,40 +43,4 @@ export interface IPerformancePlugin {
 export interface IRecordPlugin {
   recordScreentime?: number
   recordScreenTypeList?: any[]
-}
-
-// 手动上报错误的参数
-export interface ICustomErrOptions {
-  message?: string
-  error?: any
-  subType?: SubType
-}
-
-/**上报错误数据**/
-export interface IWindowErrorData {
-  message?: string | Event
-  file?: string
-  row?: number | string
-  col?: number | string
-  stack?: any
-  error?: any
-  subType?: 'jsError'
-}
-
-export interface IPromiseErrorData {
-  message?: string
-  error?: any
-  subType?: 'promiseError'
-}
-
-export interface IResourceErrorData {
-  message?: string
-  file?: unknown
-  html?: any
-  subType?: 'resourceError'
-}
-
-// 上报PV
-export interface IPVData {
-  subType: 'pv'
 }

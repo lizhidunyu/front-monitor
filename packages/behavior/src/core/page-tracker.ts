@@ -1,5 +1,6 @@
-import { IReportData, IPageChangeData } from '../../types'
-import { reportData } from '../../utils'
+import { TYPES } from '../../../utils/src/constants'
+import { IReportData, IPageChangeData } from '../../../types'
+import { reportData } from '../../../utils'
 
 class PageChangeTracker {
   private beforeTime
@@ -20,12 +21,12 @@ class PageChangeTracker {
 
   listenandReport() {
     const currentPage = window.location.href
-    const reportData: IPageChangeData = {
+    const data: IPageChangeData = {
       subType: 'pageChange',
       stayTime: this.stayTime,
       page: this.beforePage
     }
-    reportData('behavior', reportData as IReportData)
+    reportData.send(TYPES.BEHAVIOR, data as IReportData)
     this.beforePage = currentPage
   }
 }

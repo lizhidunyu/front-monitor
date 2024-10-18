@@ -5,15 +5,15 @@ import {
   PERFORMANCE_TYPE,
   BEHAVIOR_TYPE,
   RECORD_TYPE
-} from '../../constants'
+} from '../constants'
 import {
   IWindowErrorData,
   IPromiseErrorData,
   IResourceErrorData,
   ICustomErrOptions
-} from '../core'
-import { IPerformanceData } from '../performance'
-import { IClickEventData, CustomType } from '../behavior'
+} from '../../../core/src/types'
+import { IPerformanceData } from '../../../performance/src/types'
+import { IClickEventData, CustomType } from '../../../behavior/src/types'
 
 // 定义一级类型
 export type Type = (typeof TYPES)[keyof typeof TYPES]

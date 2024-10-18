@@ -11,12 +11,12 @@ export const measureFP = (callback: Callback) => {
         fpValue = entry.startTime
         observer.disconnect()
 
-        const reportData: IPerformanceData = {
+        const data: IPerformanceData = {
           subType: 'FP',
           value: fpValue
         }
         // reportData('performance', reportData as IReportData)
-        callback(reportData)
+        callback(data)
       }
     })
   }

@@ -1,5 +1,7 @@
-import { Callback, STATUS_CODE } from '../../../types'
-import { _Monitor } from '../../../utils'
+import { Callback } from '../../../../utils/src/types'
+import { ERROR_TYPE, STATUS_CODE } from '../../../../utils/src/constants'
+import { _Monitor } from '../../../../utils'
+import { notify } from '../../utils/subscribe'
 
 export function openWhiteScreen(
   callback: Callback,
@@ -122,4 +124,8 @@ export function openWhiteScreen(
       sampling()
     }
   }
+}
+
+export const whiteScreen = (): void => {
+  notify(ERROR_TYPE.WHITESCREEN_ERROE)
 }

@@ -38,3 +38,12 @@ window.cancelIdleCallback =
 
 export const originalOpen = XMLHttpRequest.prototype.open
 export const originalSend = XMLHttpRequest.prototype.send
+
+export function getLocationHref(): string {
+  if (typeof document === 'undefined' || document.location == null) return ''
+  return document.location.href
+}
+
+export function getTimestamp(): number {
+  return Date.now()
+}

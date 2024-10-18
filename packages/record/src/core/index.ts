@@ -13,13 +13,13 @@ export function recordScreen(reportData: any, recordScreenTime: number) {
         if (_Monitor.hasError) {
           const recordScreenId = _Monitor.recordScreenId
           _Monitor.recordScreenId = generateUniqueId('record', Date.now())
-          const reportData: IRecordData = {
+          const data: IRecordData = {
             subType: RECORD_TYPE.RECORD_SCREEN,
             recordScreenId,
             time: Date.now(),
             events: zip(events)
           }
-          reportData(TYPES.RECORD, reportData as IReportData)
+          reportData.send(TYPES.RECORD, data as IReportData)
           events = []
           _Monitor.hasError = false
         } else {

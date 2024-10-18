@@ -13,13 +13,13 @@ export const measureLCP = (callback: Callback) => {
         lcpValue = entry.startTime
         observer.disconnect()
 
-        const reportData: IPerformanceData = {
+        const data: IPerformanceData = {
           subType: 'LCP',
           value: lcpValue,
           rating: lcpValue > STANDARD_LCP ? 'poor' : 'good'
         }
         // reportData('performance', reportData as IReportData)
-        callback(reportData)
+        callback(data)
       }
     })
   }

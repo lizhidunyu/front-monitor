@@ -13,13 +13,13 @@ export const measureFCP = (callback: Callback) => {
         fcpValue = entry.startTime
         observer.disconnect()
 
-        const reportData: IPerformanceData = {
+        const data: IPerformanceData = {
           subType: 'FCP',
           value: fcpValue,
           rating: fcpValue > STANDARD_FCP ? 'poor' : 'good'
         }
         // reportData('performance', reportData as IReportData)
-        callback(reportData)
+        callback(data)
       }
     })
   }

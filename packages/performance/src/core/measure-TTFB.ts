@@ -14,7 +14,7 @@ export const measureTTFB = (callback: Callback) => {
         ttfbValue = navigationEntry.responseStart - navigationEntry.requestStart
         observer.disconnect()
 
-        const reportData: IPerformanceData = {
+        const data: IPerformanceData = {
           subType: 'TTFB',
           value: ttfbValue,
           rating:
@@ -25,7 +25,7 @@ export const measureTTFB = (callback: Callback) => {
                 : 'poor'
         }
         // reportData('performance', reportData as IReportData)
-        callback(reportData)
+        callback(data)
       }
     })
   }

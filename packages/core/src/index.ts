@@ -1,10 +1,9 @@
-import { IOptions, ICustomErrOptions, ICustomClickOptions } from '../../types'
-import { setOptions } from './core/config'
-import { catchError, errorCapture } from './core/catch-error'
-import { getPV } from './core/collect-pv'
-import { reportData, CacheEvents } from '../../utils'
-// import { performancePlugin } from '../performance/index'
 import { autoTrackerClick, customTrackerClick } from '../../behavior/index'
+import { IOptions, ICustomErrOptions } from '../src/types'
+import { reportData, CacheEvents } from '../../utils'
+import { setupReplace } from './utils/setup-raplace'
+// import { errorCapture } from './core/catch-error'
+import { setOptions } from './core/config'
 
 class Monitor {
   private options
@@ -16,8 +15,7 @@ class Monitor {
   // 初始化
   init() {
     setOptions(this.options)
-    catchError()
-    getPV()
+    setupReplace()
     if (this.options.autoTracker) {
       //默认不使用无痕埋点
       autoTrackerClick() // 开启无痕埋点
@@ -26,11 +24,12 @@ class Monitor {
 
   // 手动上报错误
   handleCustomError(options: ICustomErrOptions) {
-    errorCapture(options)
+    // errorCapture(options)
   }
 
   // 手动埋点
-  tracker(options: ICustomClickOptions) {
+  //  ICustomClickOptions
+  tracker(options: any) {
     customTrackerClick(options)
   }
 

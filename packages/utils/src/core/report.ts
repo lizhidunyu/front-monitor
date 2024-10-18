@@ -2,13 +2,14 @@
  * @description: 上报数据信息
  */
 
-import { IOptions, IReportConfig, IReportData, Type } from '../../types'
+import { cacheEvents } from '@/core/src/utils/cache-events'
+import { IOptions } from '@/core/src/types'
+import { options } from '@/core/src/core'
+import { IReportConfig, IReportData, Type } from '../types'
 import { generateUniqueId, isSupportSendBeacon } from './core'
-import { options } from '../../core/src/core/config'
 import { _Monitor } from './global'
 import { Queue } from './queue'
-import { cacheEvents } from '../../core/src/utils/cache-events'
-import { TYPES } from '../../constants'
+import { TYPES } from '../constants'
 
 export class ReportData {
   url = ''
@@ -77,6 +78,14 @@ export class ReportData {
     return info
   }
 
+  // 判断是否为SDK配置的接口
+  isSdkTransportUrl(targetUrl: string): boolean {
+    if (this.url && targetUrl.indexOf(this.url) !== -1) {
+      return true
+    }
+    return false
+  }
+
   bindOptions(options: IOptions) {
     const { url, appId, userId, reportConfig } = options
     const { isImgReport, isImmediate, timeout } = reportConfig || {}
@@ -89,7 +98,7 @@ export class ReportData {
     timeout && (this.timeout = timeout)
   }
 
-  async send(data: IReportConfig) {
+  async send(type: Type, data: IReportConfig) {
     // 录屏插件提供
     if (_Monitor.recordScreen) {
       if (options?.recordConfig?.recordScreenTypeList?.includes(data.type)) {
@@ -98,6 +107,7 @@ export class ReportData {
         data.recordScreenId = _Monitor.recordScreenId
       }
     }
+    data.type = type
     const result = (await this.beforePost(data)) as IReportData
     // 优先使用sendBeacon()上报
     const value = this.beacon(this.url, result)

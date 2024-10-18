@@ -13,13 +13,13 @@ export const measureFID = (callback: Callback) => {
           (entry as PerformanceEventTiming).processingStart - entry.startTime
         observer.disconnect()
 
-        const reportData: IPerformanceData = {
+        const data: IPerformanceData = {
           subType: 'FID',
           value: fidValue,
           rating: fidValue > STANDARD_FID ? 'poor' : 'good'
         }
         // reportData('performance', reportData as IReportData)
-        callback(reportData)
+        callback(data)
       }
     })
   }

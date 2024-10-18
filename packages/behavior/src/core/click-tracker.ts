@@ -1,16 +1,20 @@
-import { TYPES } from '@/constants'
-import { IClickEventData, IReportData, ICustomClickOptions } from '../../types'
-import { reportData } from '../../utils'
+import { TYPES } from '@/utils/src/constants'
+import {
+  IClickEventData,
+  IReportData,
+  ICustomClickOptions
+} from '../../../types'
+import { reportData } from '../../../utils'
 import { getPathTo } from '../utils'
 
 // 手动上报
 export function customTrackerClick(options: ICustomClickOptions) {
   const { type: subType, message } = options
-  const reportData: IClickEventData = {
+  const data: IClickEventData = {
     subType: subType,
     data: message
   }
-  reportData('behavior', reportData as IReportData)
+  reportData.send(TYPES.BEHAVIOR, data as IReportData)
 }
 
 // 自动上报
@@ -28,11 +32,11 @@ export function autoTrackerClick() {
         return
       }
 
-      const reportData: IClickEventData = {
+      const data: IClickEventData = {
         subType: 'click',
         data: target || getPathTo(clickDOM as HTMLElement)
       }
-      reportData('behavior', reportData as IReportData)
+      reportData.send(TYPES.BEHAVIOR, data as IReportData)
     },
     false
   )

@@ -18,13 +18,13 @@ export function measureCLS(callback: Callback) {
       }
     })
     observer.disconnect()
-    const reportData: IPerformanceData = {
+    const data: IPerformanceData = {
       subType: 'CLS',
       value: clsValue,
       rating: clsValue > STANDARD_CLS ? 'poor' : 'good'
     }
     // reportData('performance', reportData as IReportData)
-    callback(reportData)
+    callback(data)
   }
   const observer = new PerformanceObserver(entryHandler)
   observer.observe({ type: 'layout-shift', buffered: true })

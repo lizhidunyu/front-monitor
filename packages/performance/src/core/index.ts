@@ -8,7 +8,7 @@ import { FMPTiming } from './measure-FMP'
 import { measureLongTask } from './measure-long-task'
 import { openWhiteScreen } from './observe-whiteScreen'
 import { reportResource } from './observe-load'
-import { TYPES } from '../../../constants'
+import { TYPES } from '../../../utils/src/constants'
 
 export const getWebVitals = (performanceConfig: any, reportData: any) => {
   const measuresToExecute = Object.keys(performanceConfig).filter(
@@ -18,31 +18,31 @@ export const getWebVitals = (performanceConfig: any, reportData: any) => {
   measuresToExecute.forEach((measureKey) => {
     switch (measureKey) {
       case 'TTFB':
-        measureTTFB((res) => reportData(TYPES.PERFORMANCE, res))
+        measureTTFB((res) => reportData.send(TYPES.PERFORMANCE, res))
         break
       case 'FP':
-        measureFP((res) => reportData(TYPES.PERFORMANCE, res))
+        measureFP((res) => reportData.send(TYPES.PERFORMANCE, res))
         break
       case 'FCP':
-        measureFCP((res) => reportData(TYPES.PERFORMANCE, res))
+        measureFCP((res) => reportData.send(TYPES.PERFORMANCE, res))
         break
       case 'LCP':
-        measureLCP((res) => reportData(TYPES.PERFORMANCE, res))
+        measureLCP((res) => reportData.send(TYPES.PERFORMANCE, res))
         break
       case 'CLS':
-        measureCLS((res) => reportData(TYPES.PERFORMANCE, res))
+        measureCLS((res) => reportData.send(TYPES.PERFORMANCE, res))
         break
       case 'FID':
-        measureFID((res) => reportData(TYPES.PERFORMANCE, res))
+        measureFID((res) => reportData.send(TYPES.PERFORMANCE, res))
         break
       case 'FMP':
-        new FMPTiming((res) => reportData(TYPES.PERFORMANCE, res))
+        new FMPTiming((res) => reportData.send(TYPES.PERFORMANCE, res))
         break
       case 'longTask':
-        measureLongTask((res) => reportData(TYPES.PERFORMANCE, res))
+        measureLongTask((res) => reportData.send(TYPES.PERFORMANCE, res))
         break
       case 'whiteScreen':
-        openWhiteScreen((res) => reportData(TYPES.PERFORMANCE, res), {
+        openWhiteScreen((res) => reportData.send(TYPES.PERFORMANCE, res), {
           skeletonProject: performanceConfig.skeletonProject || 'false',
           whiteBoxElements: performanceConfig.skeletonProject || [
             'html',
@@ -53,7 +53,7 @@ export const getWebVitals = (performanceConfig: any, reportData: any) => {
         })
         break
       case 'resourceList':
-        reportResource((res) => reportData(TYPES.PERFORMANCE, res))
+        reportResource((res) => reportData.send(TYPES.PERFORMANCE, res))
         break
     }
   })

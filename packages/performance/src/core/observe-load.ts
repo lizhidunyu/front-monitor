@@ -3,7 +3,7 @@
  */
 
 import { Callback, IPerformanceData, IRecordData } from '../../../types'
-import { PERFORMANCE_TYPE } from '../../../constants'
+import { PERFORMANCE_TYPE } from '../../../utils/src/constants'
 
 // 判断资源是否来自缓存
 export function isCache(entry: PerformanceResourceTiming): boolean {
@@ -36,10 +36,10 @@ export function getResource(): PerformanceResourceTiming[] {
 
 export function reportResource(callback: Callback) {
   window.addEventListener('load', () => {
-    const reportData: IPerformanceData = {
+    const data: IPerformanceData = {
       subType: PERFORMANCE_TYPE.RESOURCE_LIST,
       resourceList: getResource()
     }
-    callback(reportData)
+    callback(data)
   })
 }
