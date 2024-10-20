@@ -1,7 +1,8 @@
-import { IReportData, IPerformanceData } from '../../../types'
+import { IPerformanceData } from '../types'
 // import { reportData } from '../utils'
 import { STANDARD_LCP } from '../constants'
-import { Callback } from '@/types'
+import { Callback } from '@/utils/src/types'
+import { PERFORMANCE_TYPE } from '@/utils/src/constants'
 
 export const measureLCP = (callback: Callback) => {
   const entryHandler = (list: PerformanceObserverEntryList) => {
@@ -14,7 +15,7 @@ export const measureLCP = (callback: Callback) => {
         observer.disconnect()
 
         const data: IPerformanceData = {
-          subType: 'LCP',
+          subType: PERFORMANCE_TYPE.LCP,
           value: lcpValue,
           rating: lcpValue > STANDARD_LCP ? 'poor' : 'good'
         }

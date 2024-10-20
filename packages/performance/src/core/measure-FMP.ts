@@ -9,8 +9,9 @@ import {
   LIMIT,
   DELAY
 } from '../constants'
-// import { reportData } from '../utils'
-import { Callback, IPerformanceData, IReportData } from '../../../types'
+import { Callback } from '@/utils/src/types'
+import { IPerformanceData } from '../types'
+import { PERFORMANCE_TYPE } from '@/utils/src/constants'
 
 export class FMPTiming {
   private statusCollector: any[]
@@ -145,7 +146,7 @@ export class FMPTiming {
 
   report(data: Number) {
     const reportData: IPerformanceData = {
-      subType: 'FMP',
+      subType: PERFORMANCE_TYPE.FMP,
       value: data as number
     }
     // reportData('performance', reportData as IReportData)

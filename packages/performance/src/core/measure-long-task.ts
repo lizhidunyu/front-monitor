@@ -1,5 +1,6 @@
-import { IReportData, IPerformanceData, Callback } from '../../../types'
-// import { reportData } from '../utils'
+import { Callback } from '@/utils/src/types'
+import { IPerformanceData } from '../types'
+import { PERFORMANCE_TYPE } from '@/utils/src/constants'
 
 export function measureLongTask(callback: Callback) {
   const entryHandler = (list: PerformanceObserverEntryList) => {
@@ -7,7 +8,7 @@ export function measureLongTask(callback: Callback) {
     for (const longTask of entries) {
       // 上报长任务详情
       const data: IPerformanceData = {
-        subType: 'longTask',
+        subType: PERFORMANCE_TYPE.LONG_TASK,
         value: longTask
       }
       callback(data)

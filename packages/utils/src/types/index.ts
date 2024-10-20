@@ -4,7 +4,8 @@ import {
   BUSINESS_TYPE,
   PERFORMANCE_TYPE,
   BEHAVIOR_TYPE,
-  RECORD_TYPE
+  RECORD_TYPE,
+  PROJECT_TYPE
 } from '../constants'
 import {
   IWindowErrorData,
@@ -13,7 +14,7 @@ import {
   ICustomErrOptions
 } from '../../../core/src/types'
 import { IPerformanceData } from '../../../performance/src/types'
-import { IClickEventData, CustomType } from '../../../behavior/src/types'
+// import { IClickEventData, CustomType } from '../../../utils/src/types'
 
 // 定义一级类型
 export type Type = (typeof TYPES)[keyof typeof TYPES]
@@ -24,7 +25,7 @@ export type SubType =
   | (typeof PERFORMANCE_TYPE)[keyof typeof PERFORMANCE_TYPE]
   | (typeof BEHAVIOR_TYPE)[keyof typeof BEHAVIOR_TYPE]
   | (typeof RECORD_TYPE)[keyof typeof RECORD_TYPE]
-  | CustomType
+// | CustomType
 
 // 上报数据的回调函数
 export interface Callback {
@@ -37,7 +38,6 @@ export type IReportData =
   | IResourceErrorData
   | ICustomErrOptions
   | IPerformanceData
-  | IClickEventData
 
 // 上报数据的全部配置信息
 export interface IReportConfig {
@@ -49,3 +49,5 @@ export interface IReportConfig {
   ua?: string
   recordScreenId?: any
 }
+
+// export type EventTypes = ERROR_TYPE | BEHAVIOR_TYPE | PROJECT_TYPE

@@ -21,3 +21,5 @@ export {
   ErrorTarget,
   ReplaceHandler
 } from './handler-callback'
+
+export { VueInstance } from './config'

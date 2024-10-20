@@ -1,5 +1,7 @@
 import { STANDARD_FID } from '../constants'
-import { Callback, IPerformanceData, IReportData } from '../../../types'
+import { Callback, IReportData } from '@/utils/src/types'
+import { IPerformanceData } from '../types'
+import { PERFORMANCE_TYPE } from '@/utils/src/constants'
 // import { reportData } from '../utils'
 
 export const measureFID = (callback: Callback) => {
@@ -14,7 +16,7 @@ export const measureFID = (callback: Callback) => {
         observer.disconnect()
 
         const data: IPerformanceData = {
-          subType: 'FID',
+          subType: PERFORMANCE_TYPE.FID,
           value: fidValue,
           rating: fidValue > STANDARD_FID ? 'poor' : 'good'
         }

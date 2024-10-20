@@ -1,0 +1,17 @@
+{
+  "folders": [
+    {
+      "path": "../../../../../JS/深入js高级/19_Promise的使用/a"
+    },
+    {
+      "path": "../../../.."
+    }
+  ],
+  "settings": {
+    "liveServer.settings.multiRootWorkspaceName": "面试"
+  },
+  "launch": {
+    "version": "0.2.0",
+    "configurations": []
+  }
+}

@@ -6,7 +6,6 @@ import { measureCLS } from './measure-CLS'
 import { measureFID } from './measure-FID'
 import { FMPTiming } from './measure-FMP'
 import { measureLongTask } from './measure-long-task'
-import { openWhiteScreen } from './observe-whiteScreen'
 import { reportResource } from './observe-load'
 import { TYPES } from '../../../utils/src/constants'
 
@@ -18,42 +17,42 @@ export const getWebVitals = (performanceConfig: any, reportData: any) => {
   measuresToExecute.forEach((measureKey) => {
     switch (measureKey) {
       case 'TTFB':
-        measureTTFB((res) => reportData.send(TYPES.PERFORMANCE, res))
+        measureTTFB((res: any) => reportData.send(TYPES.PERFORMANCE, res))
         break
       case 'FP':
-        measureFP((res) => reportData.send(TYPES.PERFORMANCE, res))
+        measureFP((res: any) => reportData.send(TYPES.PERFORMANCE, res))
         break
       case 'FCP':
-        measureFCP((res) => reportData.send(TYPES.PERFORMANCE, res))
+        measureFCP((res: any) => reportData.send(TYPES.PERFORMANCE, res))
         break
       case 'LCP':
-        measureLCP((res) => reportData.send(TYPES.PERFORMANCE, res))
+        measureLCP((res: any) => reportData.send(TYPES.PERFORMANCE, res))
         break
       case 'CLS':
-        measureCLS((res) => reportData.send(TYPES.PERFORMANCE, res))
+        measureCLS((res: any) => reportData.send(TYPES.PERFORMANCE, res))
         break
       case 'FID':
-        measureFID((res) => reportData.send(TYPES.PERFORMANCE, res))
+        measureFID((res: any) => reportData.send(TYPES.PERFORMANCE, res))
         break
       case 'FMP':
-        new FMPTiming((res) => reportData.send(TYPES.PERFORMANCE, res))
+        new FMPTiming((res: any) => reportData.send(TYPES.PERFORMANCE, res))
         break
       case 'longTask':
-        measureLongTask((res) => reportData.send(TYPES.PERFORMANCE, res))
+        measureLongTask((res: any) => reportData.send(TYPES.PERFORMANCE, res))
         break
-      case 'whiteScreen':
-        openWhiteScreen((res) => reportData.send(TYPES.PERFORMANCE, res), {
-          skeletonProject: performanceConfig.skeletonProject || 'false',
-          whiteBoxElements: performanceConfig.skeletonProject || [
-            'html',
-            'body',
-            '#app',
-            '#root'
-          ]
-        })
-        break
+      // case 'whiteScreen':
+      //   openWhiteScreen((res) => reportData.send(TYPES.PERFORMANCE, res), {
+      //     skeletonProject: performanceConfig.skeletonProject || 'false',
+      //     whiteBoxElements: performanceConfig.skeletonProject || [
+      //       'html',
+      //       'body',
+      //       '#app',
+      //       '#root'
+      //     ]
+      //   })
+      //   break
       case 'resourceList':
-        reportResource((res) => reportData.send(TYPES.PERFORMANCE, res))
+        reportResource((res: any) => reportData.send(TYPES.PERFORMANCE, res))
         break
     }
   })

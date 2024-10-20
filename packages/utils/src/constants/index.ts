@@ -24,6 +24,11 @@ export enum TYPES {
 //   RECORDSCREEN = 'recordScreen'
 // }
 
+export enum PROJECT_TYPE {
+  VUE = 'Vue',
+  REACT = 'React'
+}
+
 export enum ERROR_TYPE {
   JS_ERROR = 'jsError',
   PROMISE_ERROR = 'promiseError',
@@ -57,6 +62,7 @@ export enum BEHAVIOR_TYPE {
   HISTORY_CHANGE = 'historyChange'
 }
 
+// 录屏相关
 export enum RECORD_TYPE {
   RECORD_SCREEN = 'recordScreen'
 }

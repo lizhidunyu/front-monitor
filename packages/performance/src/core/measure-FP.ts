@@ -1,4 +1,6 @@
-import { IReportData, IPerformanceData, Callback } from '../../../types'
+import { IReportData, Callback } from '@/utils/src/types'
+import { IPerformanceData } from '../types'
+import { PERFORMANCE_TYPE } from '@/utils/src/constants'
 // import { reportData } from '../utils'
 
 export const measureFP = (callback: Callback) => {
@@ -12,7 +14,7 @@ export const measureFP = (callback: Callback) => {
         observer.disconnect()
 
         const data: IPerformanceData = {
-          subType: 'FP',
+          subType: PERFORMANCE_TYPE.FP,
           value: fpValue
         }
         // reportData('performance', reportData as IReportData)

@@ -1,7 +1,8 @@
-import { IReportData, IPerformanceData } from '../../../types'
+import { IPerformanceData } from '../types'
 // import { reportData } from '../utils'
 import { STANDARD_FCP } from '../constants'
-import { Callback } from '@/types'
+import { Callback, IReportData } from '@/utils/src/types'
+import { PERFORMANCE_TYPE } from '@/utils/src/constants'
 
 export const measureFCP = (callback: Callback) => {
   const entryHandler = (list: PerformanceObserverEntryList) => {
@@ -14,7 +15,7 @@ export const measureFCP = (callback: Callback) => {
         observer.disconnect()
 
         const data: IPerformanceData = {
-          subType: 'FCP',
+          subType: PERFORMANCE_TYPE.FCP,
           value: fcpValue,
           rating: fcpValue > STANDARD_FCP ? 'poor' : 'good'
         }

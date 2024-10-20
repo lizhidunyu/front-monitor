@@ -1,7 +1,8 @@
-import { Callback } from '@/types'
-import { IReportData, IPerformanceData } from '../../../types'
+import { Callback, IReportData } from '@/utils/src/types'
+import { IPerformanceData } from '../types'
 // import { reportData } from '../utils'
 import { TTFB_RANGE } from '../constants'
+import { PERFORMANCE_TYPE } from '@/utils/src/constants'
 
 export const measureTTFB = (callback: Callback) => {
   const entryHandler = (list: PerformanceObserverEntryList) => {
@@ -15,7 +16,7 @@ export const measureTTFB = (callback: Callback) => {
         observer.disconnect()
 
         const data: IPerformanceData = {
-          subType: 'TTFB',
+          subType: PERFORMANCE_TYPE.TTFB,
           value: ttfbValue,
           rating:
             ttfbValue <= TTFB_RANGE.PRETTY

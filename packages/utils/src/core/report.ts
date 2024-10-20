@@ -108,6 +108,7 @@ export class ReportData {
       }
     }
     data.type = type
+    // @ts-ignore
     const result = (await this.beforePost(data)) as IReportData
     // 优先使用sendBeacon()上报
     const value = this.beacon(this.url, result)
