@@ -2,9 +2,9 @@
  * @description: 用户行为栈：用来缓存用户的行为事件
  **/
 
-import { _Monitor } from '@/utils'
+import { _Monitor } from '../../../utils'
 import { CACHEEVENTTYPES, ICacheEventData, IOptions } from '../types'
-import { BEHAVIOR_TYPE, ERROR_TYPE } from '@/utils/src/constants'
+import { BEHAVIOR_TYPE, ERROR_TYPE } from '../../../utils/src/constants'
 
 export class CacheEvents {
   maxCacheEventsNum = 20 // 行为存放的最大长度
@@ -81,6 +81,6 @@ export class CacheEvents {
   }
 }
 
-const cacheEvents =
-  _Monitor.cacheEvents || (_Monitor.cacheEvents = new CacheEvents())
+const cacheEvents = new CacheEvents()
+_Monitor && _Monitor?.cacheEvents && (_Monitor.cacheEvents = cacheEvents)
 export { cacheEvents }

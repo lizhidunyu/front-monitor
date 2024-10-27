@@ -71,4 +71,4 @@ class Monitor {
   }
 }
 
-export default Monitor
+export { Monitor }

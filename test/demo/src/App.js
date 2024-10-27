@@ -1,28 +1,19 @@
 import React from 'react'
 import { Button } from 'antd'
 import Monitor from '@front-monitor/core'
-import { PerformancePlugin } from '@front-monitor/performance'
+import PerformancePlugin from '@front-monitor/performance'
 // import { performancePlugin } from '@front-monitor/performance'
-console.log(123)
-const monitor = new Monitor({
-  config: {
-    userId: '123',
-    url: 'http://localhost:8000/report'
-    // reportConfig: { isImgReport: true },
-  }
-})
+// console.log(Monitor.init())
 
-monitor.init()
-new PerformancePlugin({
-  // TTFB: true,
-  // CLS: true,
-  // FCP: true,
-  // FID: true,
-  // FP: true,
-  // LCP: true,
-  // longTask: true,
-  // FMP: true
+// const monitor = new Monitor()
+
+Monitor.init({
+  userId: '123',
+  dsn: 'http://localhost:8000/report',
+  appKey: '11'
+  // reportConfig: { isImgReport: true },
 })
+new PerformancePlugin()
 
 const App = () => (
   <div className="App">
@@ -50,12 +41,12 @@ const App = () => (
     <Button
       type="primary"
       onClick={(e) => {
-        monitor.handleCustomError({
-          message: 'Oops something went wrong',
-          error: '未知错误',
-          errorType: 'jsError'
-        })
-        e.stopPropagation()
+        // monitor.handleCustomError({
+        //   message: 'Oops something went wrong',
+        //   error: '未知错误',
+        //   errorType: 'jsError'
+        // })
+        // e.stopPropagation()
       }}
     >
       自定义错误

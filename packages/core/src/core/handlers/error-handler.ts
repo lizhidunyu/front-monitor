@@ -10,6 +10,8 @@ export const listenError = (): void => {
 
 export function unhandledrejectionReplace(): void {
   on(window, ERROR_TYPE.PROMISE_ERROR, function (ev: PromiseRejectionEvent) {
+    console.log('*******')
+
     // ev.preventDefault() 阻止默认行为后，控制台就不会再报红色错误
     notify(ERROR_TYPE.PROMISE_ERROR, ev)
   })

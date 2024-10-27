@@ -52,7 +52,10 @@ function setOptions(options: Partial<IOptions>, target: any = options): void {
     }
   }
   // 初始化用户行为栈
+  // @ts-ignore
   cacheEvents.bindOptions(options)
+  console.log('cacheEvents')
+
   // 初始化上报信息
   reportData.bindOptions(options)
 }

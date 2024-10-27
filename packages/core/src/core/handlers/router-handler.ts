@@ -4,13 +4,13 @@ import { BEHAVIOR_TYPE, ERROR_TYPE } from '@/utils/src/constants'
 import { Callback } from '@/utils/src/types'
 import { on, replaceAop } from '../../utils/helper'
 
-let lastHref: string = getLocationHref()
+let lastHref: string = document.location.href
 export function historyReplace(): void {
   const oldOnpopstate = window.onpopstate
   // 添加 onpopstate事件
   // TODO:这里是什么意思？
   window.onpopstate = function (this: any, ...args: any): void {
-    const to = getLocationHref()
+    const to = document.location.href
     const from = lastHref
     lastHref = to
     notify(BEHAVIOR_TYPE.HISTORY_CHANGE, {

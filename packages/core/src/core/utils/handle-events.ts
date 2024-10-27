@@ -21,6 +21,7 @@ const HandleEvents = {
         // todo:在cacheEvents映射类型
         category: cacheEvents.getCategory(type),
         data: result,
+        // @ts-ignore
         status: result.status,
         time: result.time
       })
