@@ -2,8 +2,9 @@ import { _Monitor, generateUniqueId, reportData } from '../../../utils'
 import { record } from 'rrweb'
 import pako from 'pako'
 import { Base64 } from 'js-base64'
-import { IRecordData, IReportData } from '@/types'
-import { RECORD_TYPE, TYPES } from '@/constants'
+import { IReportData } from '@/utils/src/types'
+import { IRecordData } from '../types'
+import { RECORD_TYPE, TYPES } from '@/utils/src/constants'
 
 export function recordScreen(reportData: any, recordScreenTime: number) {
   let events: any[] = []

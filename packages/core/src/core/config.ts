@@ -9,11 +9,12 @@ const options: IOptions = {
   userId: '',
   autoTracker: false, //是否使用无痕埋点
   skeletonProject: false, // 是否属于骨架屏
-  whiteBoxElements: [], // 白屏检测的容器列表
-  maxCacheEventsNum: 10,
+  whiteBoxElements: ['html', 'body', '#app', '#root'], // 白屏检测的容器列表
+  maxCacheEventsNum: 20, // 用户行为栈的容量
   filterXhrUrlRegExp: '', // 过滤的接口请求正则
   handleHttpStatus: null, // 用户设置handleHttpStatus函数来判断接口是否正确
   beforePushCache: null,
+  repeatCodeError: false, // 去除重复的异常代码
   // 上报配置
   reportConfig: {
     isImgReport: false, // 是否采用图片上报
@@ -29,10 +30,7 @@ const options: IOptions = {
     LCP: true,
     longTask: true,
     FMP: true,
-    whiteScreen: true,
-    resourceList: true,
-    skeletonProject: false,
-    whiteBoxElements: ['html', 'body', '#app', '#root']
+    resourceList: true
   },
   //录屏配置
   recordConfig: {
