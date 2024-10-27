@@ -15,7 +15,10 @@ import Monitor from '@front-monitor/core' //核心模块
 import performancePlugin from '@front-monitor/performance' //性能监控模块
 import recordPlugin from '@front-monitor/performance' //录屏模块
 
-const monitor = new Monitor({
+const monitor = new Monitor()
+
+// 初始化
+monitor.init({
   url: 'http://localhost:8000/report',
   appId: '',
   userId: '',
@@ -35,9 +38,6 @@ const monitor = new Monitor({
     isImmediate: false // 是否延迟上报
   },
 })
-
-// 初始化
-monitor.init()
 // 引入性能监控插件，支持自定义性能监控列表
 monitor.use(performancePlugin,{
   performanceConfig: {

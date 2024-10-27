@@ -10,10 +10,10 @@ import PerformancePlugin from '@front-monitor/performance'
 Monitor.init({
   userId: '123',
   dsn: 'http://localhost:8000/report',
-  appKey: '11'
-  // reportConfig: { isImgReport: true },
+  appKey: '11',
+  reportConfig: { isImgReport: true }
 })
-new PerformancePlugin()
+Monitor.use(PerformancePlugin)
 
 const App = () => (
   <div className="App">
