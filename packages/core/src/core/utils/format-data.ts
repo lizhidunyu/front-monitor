@@ -69,7 +69,6 @@ export function httpTransform(data: HttpData): HttpData {
 export function resourceTransform(target: ResourceTarget): any {
   return {
     time: getTimestamp(),
-    // TODO:这里的逻辑？
     message: '',
     //   (interceptStr(target.src as string, 120) ||
     //     interceptStr(target.href as string, 120)) + '; 资源加载失败',

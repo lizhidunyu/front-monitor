@@ -134,6 +134,7 @@ const HandleEvents = {
 
   // 异常错误，添加到行为栈
   handleUnhandleRejection(ev: PromiseRejectionEvent): void {
+    debugger
     // TODO：ErrorStackParser
     const stackFrame = ErrorStackParser.parse(ev.reason)[0]
     const { fileName, columnNumber, lineNumber } = stackFrame
