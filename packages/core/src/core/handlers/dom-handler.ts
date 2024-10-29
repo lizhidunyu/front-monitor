@@ -1,7 +1,7 @@
 import { notify } from '../../utils/subscribe'
 import { options } from '../config'
 import { on, throttle } from '../../utils/helper'
-import { BEHAVIOR_TYPE } from '@/utils/src/constants'
+import { BEHAVIOR_TYPE } from '../../../../utils/src/constants'
 
 export function domReplace(): void {
   if (!('document' in window)) return

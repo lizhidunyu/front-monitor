@@ -1,6 +1,6 @@
 import { subscribeEvent } from './subscribe'
 import { options } from '../core'
-import { BEHAVIOR_TYPE, ERROR_TYPE } from '@/utils/src/constants'
+import { BEHAVIOR_TYPE, ERROR_TYPE } from '../../../utils/src/constants'
 import { ReplaceHandler } from '../types'
 import {
   whiteScreen,

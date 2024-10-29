@@ -1,4 +1,8 @@
-import { BEHAVIOR_TYPE, ERROR_TYPE, STATUS_CODE } from '@/utils/src/constants'
+import {
+  BEHAVIOR_TYPE,
+  ERROR_TYPE,
+  STATUS_CODE
+} from '../../../utils/src/constants'
 
 // 用户行为类型
 export enum CACHEEVENTTYPES {

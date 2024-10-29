@@ -1,10 +1,18 @@
 /**
+  1.封装一个上报数据的类，支持xhr, 图片，beacon三种上报形式
+  2.在上报的时候携带用户行为栈，性能数据、录屏、白屏检测等不需要附带用户行为
+  3.同时如果开启了录屏(录屏插件提供),并且支持当前上报的数据类型，会记录一条recordScreenId,
+    之后在录屏插件用通过一个id上报的时候录屏数据
+  4.同时提供一个beforePost函数，支持用户在上报数据之前进行自己自定义的错误
+*/
+
+/**
  * @description: 上报数据信息
  */
 
-import { cacheEvents } from '@/core/src/utils/cache-events'
-import { IOptions } from '@/core/src/types'
-import { options } from '@/core/src/core'
+import { cacheEvents } from '../../../core/src/utils/cache-events'
+import { IOptions } from '../../..//core/src/types'
+import { options } from '../../..//core/src/core'
 import { IReportConfig, IReportData, Type } from '../types'
 import { generateUniqueId, isSupportSendBeacon } from './core'
 import { _Monitor } from './global'
@@ -108,8 +116,7 @@ export class ReportData {
       }
     }
     data.type = type
-    // @ts-ignore
-    const result = (await this.beforePost(data)) as IReportData
+    const result = (await this.beforePost(data as any)) as IReportData
     // 优先使用sendBeacon()上报
     const value = this.beacon(this.url, result)
     if (!value) {

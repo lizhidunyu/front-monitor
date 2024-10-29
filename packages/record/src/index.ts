@@ -1,6 +1,6 @@
-import { TYPES } from '@/utils/src/constants'
-import { IRecordPlugin } from '@/core/src/types'
-import { _Monitor, generateUniqueId } from '@/utils'
+import { TYPES } from '../../utils/src/constants'
+import { IRecordPlugin } from '../../core/src/types'
+import { _Monitor, generateUniqueId } from '../../utils'
 import { recordScreen } from './core'
 
 export default class recordPlugin {

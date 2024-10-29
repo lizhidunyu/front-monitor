@@ -1,7 +1,7 @@
-import { BEHAVIOR_TYPE, ERROR_TYPE } from '@/utils/src/constants'
-import { Callback } from '@/utils/src/types'
+import { BEHAVIOR_TYPE, ERROR_TYPE } from '../../../utils/src/constants'
+import { Callback } from '../../../utils/src/types'
 import { ReplaceHandler } from '../types'
-import { getFlag, setFlag } from '@/utils/src/core/global'
+import { getFlag, setFlag } from '../../../utils/src/core/global'
 
 // 基于发布者-订阅者模式实现事件机制
 // @ts-ignore
@@ -18,6 +18,8 @@ export function subscribeEvent(handler: ReplaceHandler): boolean {
   handlers[handler.type].push(handler.callback)
   return true
 }
+
+console.log('handlers:', handlers)
 
 // 更新依赖
 export function notify(type: ERROR_TYPE | BEHAVIOR_TYPE, data?: any): void {

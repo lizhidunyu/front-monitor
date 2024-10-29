@@ -1,4 +1,4 @@
-import { Callback } from '@/utils/src/types'
+import { Callback } from '../../../utils/src/types'
 
 /**
  * @description: 重写对象上面的某个属性

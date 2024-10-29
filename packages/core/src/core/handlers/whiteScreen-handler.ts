@@ -1,3 +1,9 @@
+// 1.如果项目有骨架屏，刚开始就要去采样
+// 如果项目没有骨架屏，等到页面加载完毕
+// 2.通过requestIdleCallback判断浏览器是否处于空闲时间
+// 3.通过elementsFromPoints进行采样，判断这17个点是否不都在容器内，，判断为不是白屏
+// 在这种情况下，注意骨架屏第一次不比较，第二次的时候和第一次采样点比较，如果一致判断为白屏
+// 如果判断为白屏开启一个定时器，采用白屏轮训机制，直到页面恢复正常停止上报
 import { Callback } from '../../../../utils/src/types'
 import { ERROR_TYPE, STATUS_CODE } from '../../../../utils/src/constants'
 import { _Monitor } from '../../../../utils'

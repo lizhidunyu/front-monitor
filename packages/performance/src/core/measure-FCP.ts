@@ -1,8 +1,8 @@
 import { IPerformanceData } from '../types'
 // import { reportData } from '../utils'
 import { STANDARD_FCP } from '../constants'
-import { Callback, IReportData } from '@/utils/src/types'
-import { PERFORMANCE_TYPE } from '@/utils/src/constants'
+import { Callback } from '../../../utils/src/types'
+import { PERFORMANCE_TYPE } from '../../../utils/src/constants'
 
 export const measureFCP = (callback: Callback) => {
   const entryHandler = (list: PerformanceObserverEntryList) => {

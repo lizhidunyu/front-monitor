@@ -2,9 +2,9 @@
  * @description: 上报资源列表
  */
 
-import { Callback } from '@/utils/src/types'
+import { Callback } from '../../../utils/src/types'
 import { IPerformanceData } from '../types'
-import { PERFORMANCE_TYPE } from '@/utils/src/constants'
+import { PERFORMANCE_TYPE } from '../../../utils/src/constants'
 
 // 判断资源是否来自缓存
 export function isCache(entry: PerformanceResourceTiming): boolean {

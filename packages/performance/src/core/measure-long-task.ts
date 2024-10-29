@@ -1,6 +1,6 @@
-import { Callback } from '@/utils/src/types'
+import { Callback } from '../../../utils/src/types'
 import { IPerformanceData } from '../types'
-import { PERFORMANCE_TYPE } from '@/utils/src/constants'
+import { PERFORMANCE_TYPE } from '../../../utils/src/constants'
 
 export function measureLongTask(callback: Callback) {
   const entryHandler = (list: PerformanceObserverEntryList) => {

@@ -1,4 +1,4 @@
-import { reportData } from '@/utils'
+import { reportData } from '../../../utils'
 import { IOptions } from '../types'
 import { cacheEvents } from '../utils/cache-events'
 
@@ -52,9 +52,10 @@ function setOptions(options: Partial<IOptions>, target: any = options): void {
     }
   }
   // 初始化用户行为栈
+  console.log(options)
+
   // @ts-ignore
   cacheEvents.bindOptions(options)
-  console.log('cacheEvents')
 
   // 初始化上报信息
   reportData.bindOptions(options)

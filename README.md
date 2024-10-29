@@ -3,17 +3,17 @@
 ### 安装
 
 ```javascript
-npm i @front-monitor/core
-npm i @front-monitor/performance
-npm i @front-monitor/record
+npm i @ycw-monitor/core
+npm i @ycw-monitor/performance
+npm i @ycw-monitor/record
 ```
 
 ### 引入
 
 ```javascript
-import Monitor from '@front-monitor/core' //核心模块
-import performancePlugin from '@front-monitor/performance' //性能监控模块
-import recordPlugin from '@front-monitor/performance' //录屏模块
+import Monitor from '@ycw-monitor/core' //核心模块
+import performancePlugin from '@ycw-monitor/performance' //性能监控模块
+import recordPlugin from '@ycw-monitor/performance' //录屏模块
 
 const monitor = new Monitor()
 

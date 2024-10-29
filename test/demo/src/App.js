@@ -1,19 +1,37 @@
 import React from 'react'
 import { Button } from 'antd'
-import Monitor from '@front-monitor/core'
+import { Monitor } from '@front-monitor/core'
 import PerformancePlugin from '@front-monitor/performance'
-// import { performancePlugin } from '@front-monitor/performance'
+// import recordPlugin from '@front-monitor/record'
 // console.log(Monitor.init())
 
-// const monitor = new Monitor()
-
-Monitor.init({
+const monitor = new Monitor({
   userId: '123',
-  dsn: 'http://localhost:8000/report',
+  url: 'http://localhost:8000/report',
   appKey: '11',
   reportConfig: { isImgReport: true }
 })
-Monitor.use(PerformancePlugin)
+
+monitor.init()
+monitor.use(PerformancePlugin, {
+  performanceConfig: {
+    TTFB: true, // 支持自定义监视的性能列表
+    CLS: true,
+    FCP: true,
+    FID: true,
+    FP: true,
+    LCP: true,
+    longTask: true,
+    FMP: true,
+    resourceList: true
+  }
+})
+// monitor.use(recordPlugin, {
+//   recordConfig: {
+//     recordScreentime: 10, // 默认录屏时长
+//     recordScreenTypeList: []
+//   }
+// })
 
 const App = () => (
   <div className="App">

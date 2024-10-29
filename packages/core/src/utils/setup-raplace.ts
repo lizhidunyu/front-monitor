@@ -1,4 +1,8 @@
-import { BEHAVIOR_TYPE, ERROR_TYPE, STATUS_CODE } from '@/utils/src/constants'
+import {
+  BEHAVIOR_TYPE,
+  ERROR_TYPE,
+  STATUS_CODE
+} from '../../../utils/src/constants'
 import { addReplaceHandler } from './add-replace-handler'
 import { HandleEvents } from '../core/utils/handle-events'
 import { cacheEvents } from './cache-events'

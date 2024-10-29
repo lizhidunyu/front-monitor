@@ -1,10 +1,20 @@
-import { ERROR_TYPE } from '@/utils/src/constants'
-import { on, replaceAop } from '../../utils/helper'
+// 1/错误、用户行为收集这个过程比较适用AOP面向切面编程，
+// 其实就是在执行原本方法之前和之后插入一些代码，执行我们想要的收集数据，
+// 例如http请求前收集数据，请求后再收集数据这样。
+
+// 2.比如我们对于网络请求的xhr进行拦截，在发送网络请求之前可以判断当前的接口是不是我们需要过滤掉的接口
+// 在返回数据的时候，根据用户传入的回调函数进行判断是不是错误，只有发生了错误才上报response等等
+
+// 3.其实就是前置通知、后置通知、返回通知异常通知这样的一些内容。
+// 主要是实现函数的重写，传入被重写的对象，key，以及以原有的函数作为参数，传入新的函数，是否进行重写等。
+
+import { ERROR_TYPE } from '../../../../utils/src/constants'
 import { isFilterHttpUrl } from '../../utils/add-replace-handler'
-import { options } from '../config'
-import { reportData } from '@/utils'
+import { on, replaceAop } from '../../utils/helper'
+import { reportData } from '../../../../utils'
 import { notify } from '../../utils/subscribe'
 import { Callback } from '../../types/error'
+import { options } from '../config'
 
 export const fetchReplace = (): void => {
   if (!('fetch' in window)) {
@@ -23,7 +33,6 @@ export const fetchReplace = (): void => {
         response: ''
       }
       // 获取配置的headers
-      // TODO: 这里不理解
       const headers = new Headers(config.headers || {})
       Object.assign(headers, {
         setRequestHeader: headers.set
@@ -100,7 +109,6 @@ export const xhrReplace = (): void => {
     return function (this: any, ...args: any[]): void {
       const { method, url } = this.monitor_xhr
       // 监听loadend事件，接口成功或失败都会执行
-      // TODO:不明白？
       on(this, 'loadend', function (this: any) {
         // NOTICE
         // isSdkTransportUrl 判断当前接口是否为上报的接口
@@ -115,7 +123,6 @@ export const xhrReplace = (): void => {
         this.monitor_xhr.requestData = args[0]
         const eTime = Date.now()
         // 设置接口的time，用户行为按时间排序
-        // TODO: 这里不理解
         this.monitor_xhr.time = this.monitor_xhr.sTime
         this.monitor_xhr.Status = status
         // TODO: responseType都有哪些类型？

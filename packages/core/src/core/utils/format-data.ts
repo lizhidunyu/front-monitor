@@ -1,7 +1,11 @@
-import { HTTP_CODE, ResourceTarget, STATUS_CODE } from '@/utils/src/constants'
+import {
+  HTTP_CODE,
+  ResourceTarget,
+  STATUS_CODE
+} from '../../../../utils/src/constants'
 import { options } from '../config'
 import { HttpData } from '../../types'
-import { getTimestamp } from '@/utils'
+import { getTimestamp } from '../../../../utils'
 
 // 处理接口的状态
 export function httpTransform(data: HttpData): HttpData {

@@ -1,8 +1,8 @@
-import { Callback, IReportData } from '@/utils/src/types'
+import { Callback, IReportData } from '../../../utils/src/types'
 import { IPerformanceData } from '../types'
 // import { reportData } from '../utils'
 import { TTFB_RANGE } from '../constants'
-import { PERFORMANCE_TYPE } from '@/utils/src/constants'
+import { PERFORMANCE_TYPE } from '../../../utils/src/constants'
 
 export const measureTTFB = (callback: Callback) => {
   const entryHandler = (list: PerformanceObserverEntryList) => {

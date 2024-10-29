@@ -31,7 +31,7 @@ export enum PROJECT_TYPE {
 
 export enum ERROR_TYPE {
   JS_ERROR = 'jsError',
-  PROMISE_ERROR = 'promiseError',
+  PROMISE_ERROR = 'unhandledRejection',
   RESOURCE_ERROR = 'resourceError',
   HTTP_ERROR = 'httpError',
   WHITESCREEN_ERROE = 'whitescreenError',
@@ -58,8 +58,8 @@ export enum PERFORMANCE_TYPE {
 
 export enum BEHAVIOR_TYPE {
   CLICK = 'click',
-  HASH_CHANGE = 'hashChange',
-  HISTORY_CHANGE = 'historyChange'
+  HASH_CHANGE = 'hashchange',
+  HISTORY_CHANGE = 'history'
 }
 
 // 录屏相关

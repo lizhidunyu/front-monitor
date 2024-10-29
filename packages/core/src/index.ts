@@ -4,7 +4,7 @@ import { reportData, CacheEvents, getFlag, setFlag } from '../../utils'
 import { setupReplace } from './utils/setup-raplace'
 // import { errorCapture } from './core/catch-error'
 import { setOptions } from './core/config'
-import { PROJECT_TYPE } from '@/utils/src/constants'
+import { PROJECT_TYPE } from '../../utils/src/constants'
 import { ViewModel } from './types/config'
 import { HandleEvents } from './core/utils/handle-events'
 
@@ -66,7 +66,7 @@ class Monitor {
   // 注册插件（性能插件/录屏插件）
   // TODO: 优化当前的逻辑
   use(plugin: any, options: IOptions) {
-    const instance = new plugin(options)
+    const instance = new plugin(options || this.options.performanceConfig)
     instance.core({ reportData, CacheEvents, options })
   }
 }

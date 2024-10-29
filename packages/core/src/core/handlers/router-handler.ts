@@ -1,7 +1,7 @@
-import { getLocationHref } from '@/utils'
+// import { getLocationHref } from '@/utils'
 import { notify } from '../../utils/subscribe'
-import { BEHAVIOR_TYPE, ERROR_TYPE } from '@/utils/src/constants'
-import { Callback } from '@/utils/src/types'
+import { BEHAVIOR_TYPE, ERROR_TYPE } from '../../../../utils/src/constants'
+import { Callback } from '../../../../utils/src/types'
 import { on, replaceAop } from '../../utils/helper'
 
 let lastHref: string = document.location.href

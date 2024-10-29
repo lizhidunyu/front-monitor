@@ -2,7 +2,7 @@ import { IPerformanceData, LayoutShift } from '../types'
 import { IReportData, Callback } from '../../../utils/src/types'
 import { reportData } from '../../../utils'
 import { STANDARD_CLS } from '../constants'
-import { PERFORMANCE_TYPE } from '@/utils/src/constants'
+import { PERFORMANCE_TYPE } from '../../../utils/src/constants'
 
 export function measureCLS(callback: Callback) {
   const entryHandler = (list: PerformanceObserverEntryList) => {

@@ -1,4 +1,4 @@
-import { SubType } from '@/utils/src/types'
+import { SubType } from '../../../utils/src/types'
 
 export interface IRecordData {
   subType?: SubType

@@ -1,8 +1,8 @@
 import { IPerformanceData } from '../types'
 // import { reportData } from '../utils'
 import { STANDARD_LCP } from '../constants'
-import { Callback } from '@/utils/src/types'
-import { PERFORMANCE_TYPE } from '@/utils/src/constants'
+import { Callback } from '../../../utils/src/types'
+import { PERFORMANCE_TYPE } from '../../../utils/src/constants'
 
 export const measureLCP = (callback: Callback) => {
   const entryHandler = (list: PerformanceObserverEntryList) => {

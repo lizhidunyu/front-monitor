@@ -9,9 +9,9 @@ import {
   LIMIT,
   DELAY
 } from '../constants'
-import { Callback } from '@/utils/src/types'
+import { Callback } from '../../../utils/src/types'
 import { IPerformanceData } from '../types'
-import { PERFORMANCE_TYPE } from '@/utils/src/constants'
+import { PERFORMANCE_TYPE } from '../../../utils/src/constants'
 
 export class FMPTiming {
   private statusCollector: any[]

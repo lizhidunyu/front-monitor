@@ -1,4 +1,4 @@
-import { ERROR_TYPE } from '@/utils/src/constants'
+import { ERROR_TYPE } from '../../../../utils/src/constants'
 import { on } from '../../utils/helper'
 import { notify } from '../../utils/subscribe'
 

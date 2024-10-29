@@ -1,6 +1,6 @@
-import { IReportData, Callback } from '@/utils/src/types'
+import { IReportData, Callback } from '../../../utils/src/types'
 import { IPerformanceData } from '../types'
-import { PERFORMANCE_TYPE } from '@/utils/src/constants'
+import { PERFORMANCE_TYPE } from '../../../utils/src/constants'
 // import { reportData } from '../utils'
 
 export const measureFP = (callback: Callback) => {

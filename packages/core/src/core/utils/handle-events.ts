@@ -1,11 +1,19 @@
 import ErrorStackParser from 'error-stack-parser'
 
-//对应事件的回调函数数组
-import { BEHAVIOR_TYPE, ERROR_TYPE } from '@/utils/src/constants'
+// 对应事件的回调函数数组
+// 这些时间会被收集到依赖数组中，当对应的事件被触发的时候，就会来到这里触发所有依赖（函数）
+// 同时具备可扩展性，我们可以自己自定义回调函数
+// 这些回调函数里面主要做的事情就是加入行为栈，或者是上报数据
+import { BEHAVIOR_TYPE, ERROR_TYPE } from '../../../../utils/src/constants'
 import { cacheEvents } from '../../utils/cache-events'
 import { openWhiteScreen, options } from '..'
-import { getErrorUid, getTimestamp, hashMapExist, reportData } from '@/utils'
-import { STATUS_CODE } from '@/performance/src/types'
+import {
+  getErrorUid,
+  getTimestamp,
+  hashMapExist,
+  reportData
+} from '../../../../utils'
+import { STATUS_CODE } from '../../../../performance/src/types'
 import { httpTransform, resourceTransform } from './format-data'
 import { ErrorTarget, RouteHistory } from '../../types'
 
@@ -28,13 +36,16 @@ const HandleEvents = {
     }
 
     if (result.status === 'error') {
-      reportData.send({ ...result, type, status: STATUS_CODE.ERROR })
+      reportData.send(ERROR_TYPE.HTTP_ERROR, {
+        ...result,
+        status: STATUS_CODE.ERROR
+      })
     }
   },
 
   // window.addEventListner()传入的对象
   handleError(ev: ErrorTarget): void {
-    const target = ev.target
+    const target = ev?.target
     if (!target || (ev.target && !ev.target.localName)) {
       // vue和react捕获的报错使用ev解析，异步错误使用ev.error解析
       // TODO: stackFrame
@@ -64,7 +75,7 @@ const HandleEvents = {
         !options.repeatCodeError ||
         (options.repeatCodeError && !hashMapExist(hash))
       ) {
-        return reportData.send(errorData)
+        return reportData.send(ERROR_TYPE.JS_ERROR, errorData)
       }
     }
 
@@ -81,9 +92,9 @@ const HandleEvents = {
         time: getTimestamp(),
         data
       })
-      return reportData.send({
+      return reportData.send(ERROR_TYPE.RESOURCE_ERROR, {
         ...data,
-        type: ERROR_TYPE.RESOURCE_ERROR,
+        // type: ERROR_TYPE.RESOURCE_ERROR,
         status: STATUS_CODE.ERROR
       })
     }
@@ -151,7 +162,7 @@ const HandleEvents = {
       !options.repeatCodeError ||
       (options.repeatCodeError && !hashMapExist(hash))
     ) {
-      reportData.send(data)
+      reportData.send(ERROR_TYPE.PROMISE_ERROR, data)
     }
   },
 
@@ -159,8 +170,8 @@ const HandleEvents = {
   handleWhiteScreen(): void {
     openWhiteScreen((res: any) => {
       // 上报白屏检测信息
-      reportData.send({
-        type: ERROR_TYPE.WHITESCREEN_ERROE,
+      reportData.send(ERROR_TYPE.WHITESCREEN_ERROE, {
+        // type: ERROR_TYPE.WHITESCREEN_ERROE,
         time: getTimestamp(),
         ...res
       })

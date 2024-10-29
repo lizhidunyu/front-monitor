@@ -1,18 +1,17 @@
 {
   "compilerOptions": {
-    "target": "ES6",
-    "module": "CommonJS",
+    "target": "ES5",
+    "module": "ESNext",
     "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "outDir": "./dist",
-    "baseUrl": "./",
+    "baseUrl": ".",
     "paths": {
       "@/*": ["packages/*"]
     },
-    "jsx": "react"
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules"]
+  "include": ["packages/**/*.ts", "packages/**/*.tsx"],
+  "exclude": ["node_modules", "**/*.spec.ts"]
 }

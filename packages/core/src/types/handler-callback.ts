@@ -1,7 +1,7 @@
 /**
  * @description: 在监听器触发，回调函数的时候传递的数据类型
  */
-import { BEHAVIOR_TYPE, ERROR_TYPE } from '@/utils/src/constants'
+import { BEHAVIOR_TYPE, ERROR_TYPE } from '../../../utils/src/constants'
 import { Callback } from './error'
 
 // 代理事件的类型
