@@ -8,7 +8,6 @@ let lastHref: string = document.location.href
 export function historyReplace(): void {
   const oldOnpopstate = window.onpopstate
   // 添加 onpopstate事件
-  // TODO:这里是什么意思？
   window.onpopstate = function (this: any, ...args: any): void {
     const to = document.location.href
     const from = lastHref

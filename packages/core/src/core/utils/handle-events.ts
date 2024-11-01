@@ -16,12 +16,11 @@ import {
 import { STATUS_CODE } from '../../../../performance/src/types'
 import { httpTransform, resourceTransform } from './format-data'
 import { ErrorTarget, RouteHistory } from '../../types'
+import { unknownToString } from '../../utils/helper'
 
 // 这里回调函数的参数是监听器传递的数据
 const HandleEvents = {
-  // TODO： 处理xhr、fetch回调
   handleHttp(data: any, type: ERROR_TYPE): void {
-    // todo:处理接口数据
     const result = httpTransform(data)
     // 添加用户行为，去掉自身上报的接口行为
     if (!data.url.includes(options.url)) {
@@ -43,13 +42,14 @@ const HandleEvents = {
     }
   },
 
-  // window.addEventListner()传入的对象
+  // window.addEventListenner()传入的对象
   handleError(ev: ErrorTarget): void {
+    console.log(' window.addEventListener--ev:', ev)
     const target = ev?.target
     if (!target || (ev.target && !ev.target.localName)) {
       // vue和react捕获的报错使用ev解析，异步错误使用ev.error解析
-      // TODO: stackFrame
       const stackFrame = ErrorStackParser.parse(!target ? ev : ev.error)[0]
+
       const { fileName, columnNumber, lineNumber } = stackFrame
       const errorData = {
         type: ERROR_TYPE.JS_ERROR,
@@ -69,6 +69,7 @@ const HandleEvents = {
       })
       const hash: string = getErrorUid(
         `${ERROR_TYPE.JS_ERROR}-${ev.message}-${fileName}-${columnNumber}`
+        // `${ERROR_TYPE.JS_ERROR}`
       )
       // 开启repeatCodeError第一次报错才上报
       if (
@@ -94,7 +95,7 @@ const HandleEvents = {
       })
       return reportData.send(ERROR_TYPE.RESOURCE_ERROR, {
         ...data,
-        // type: ERROR_TYPE.RESOURCE_ERROR,
+        type: ERROR_TYPE.RESOURCE_ERROR,
         status: STATUS_CODE.ERROR
       })
     }
@@ -134,15 +135,15 @@ const HandleEvents = {
 
   // 异常错误，添加到行为栈
   handleUnhandleRejection(ev: PromiseRejectionEvent): void {
-    debugger
-    // TODO：ErrorStackParser
+    console.log('handleUnhandleRejection--ev:', ev)
     const stackFrame = ErrorStackParser.parse(ev.reason)[0]
     const { fileName, columnNumber, lineNumber } = stackFrame
-    const message = ev.reason.message || ev.reason.stack
+    const message = unknownToString(ev.reason.message || ev.reason.stack)
     const data = {
       type: ERROR_TYPE.PROMISE_ERROR,
       status: STATUS_CODE.ERROR,
       time: getTimestamp(),
+      message,
       fileName,
       line: lineNumber,
       column: columnNumber
@@ -157,6 +158,7 @@ const HandleEvents = {
     })
     const hash: string = getErrorUid(
       `${ERROR_TYPE.PROMISE_ERROR}-${message}-${fileName}-${columnNumber}`
+      // `${ERROR_TYPE.PROMISE_ERROR}-${message}`
     )
     // 开启repeatCodeError第一次报错才上报
     if (
@@ -172,7 +174,7 @@ const HandleEvents = {
     openWhiteScreen((res: any) => {
       // 上报白屏检测信息
       reportData.send(ERROR_TYPE.WHITESCREEN_ERROE, {
-        // type: ERROR_TYPE.WHITESCREEN_ERROE,
+        type: ERROR_TYPE.WHITESCREEN_ERROE,
         time: getTimestamp(),
         ...res
       })

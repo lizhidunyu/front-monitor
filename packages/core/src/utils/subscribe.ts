@@ -23,6 +23,8 @@ console.log('handlers:', handlers)
 
 // 更新依赖
 export function notify(type: ERROR_TYPE | BEHAVIOR_TYPE, data?: any): void {
+  // debugger
+  console.log('notify____', 'type:', type, 'handlers[type]', handlers[type])
   if (!type || !handlers[type]) return
   handlers[type].forEach((callback) => {
     callback(data)

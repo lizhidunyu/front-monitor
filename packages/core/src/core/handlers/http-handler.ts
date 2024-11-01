@@ -41,7 +41,6 @@ export const fetchReplace = (): void => {
       return originalFetch.apply(window, [url, config]).then(
         (res: any) => {
           // 克隆一份，防止被标记已消费
-          // TODO?: res
           const tempRes = res.clone()
           const eTime = Date.now()
           fetchData = Object.assign({}, fetchData, {

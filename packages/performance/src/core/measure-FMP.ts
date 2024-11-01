@@ -41,7 +41,6 @@ export class FMPTiming {
     if (bodyTarget) {
       this.doTag(bodyTarget, this.callbackCount++)
     }
-    // TODO:这个的作用是什么？
     this.statusCollector.push({
       t
     })

@@ -1,9 +1,8 @@
 import React from 'react'
-import { Button } from 'antd'
+import { Button, Breadcrumb } from 'antd'
 import { Monitor } from '@front-monitor/core'
 import PerformancePlugin from '@front-monitor/performance'
 // import recordPlugin from '@front-monitor/record'
-// console.log(Monitor.init())
 
 const monitor = new Monitor({
   userId: '123',
@@ -13,25 +12,7 @@ const monitor = new Monitor({
 })
 
 monitor.init()
-monitor.use(PerformancePlugin, {
-  performanceConfig: {
-    TTFB: true, // 支持自定义监视的性能列表
-    CLS: true,
-    FCP: true,
-    FID: true,
-    FP: true,
-    LCP: true,
-    longTask: true,
-    FMP: true,
-    resourceList: true
-  }
-})
-// monitor.use(recordPlugin, {
-//   recordConfig: {
-//     recordScreentime: 10, // 默认录屏时长
-//     recordScreenTypeList: []
-//   }
-// })
+monitor.use(PerformancePlugin)
 
 const App = () => (
   <div className="App">
@@ -39,12 +20,14 @@ const App = () => (
       type="primary"
       style={{ marginRight: '10px' }}
       onClick={(e) => {
-        var script = document.createElement('script')
-        script.src = 'nonexistent.js'
-        document.head.appendChild(script)
+        const bar = 'aa'
+        const foo = () => {
+          bar()
+        }
+        foo()
       }}
     >
-      资源加载错误
+      JS错误
     </Button>
     <Button
       type="primary"
@@ -69,7 +52,26 @@ const App = () => (
     >
       自定义错误
     </Button>
+    <Breadcrumb
+      items={[
+        {
+          title: <a href="#home">Home</a>
+        },
+        {
+          title: <a href="#center">Application Center</a>
+        },
+        {
+          title: <a href="#list">Application List</a>
+        },
+        {
+          title: <a href="#app">An Application</a>
+        }
+      ]}
+    />
   </div>
 )
 
+// setTimeout(() => {
+//   Promise.reject('error-123')
+// }, 5000)
 export default App

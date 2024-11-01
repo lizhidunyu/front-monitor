@@ -32,6 +32,8 @@ export class ReportData {
   // sendBeacon()上报
   beacon(url: string, data: IReportData) {
     if (isSupportSendBeacon()) {
+      console.log('beacon:', data)
+
       return window.navigator.sendBeacon(url, JSON.stringify(data))
     }
   }
@@ -72,7 +74,7 @@ export class ReportData {
   getTransportData(data: any): ReportData {
     const info = {
       ...data,
-      uuid: generateUniqueId(data.subType, Date.now()),
+      uuid: generateUniqueId(data.type, Date.now()),
       pageUrl: document.location.href
       // TODO:设备信息和用户信息
     }

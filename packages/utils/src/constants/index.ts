@@ -31,7 +31,7 @@ export enum PROJECT_TYPE {
 
 export enum ERROR_TYPE {
   JS_ERROR = 'jsError',
-  PROMISE_ERROR = 'unhandledRejection',
+  PROMISE_ERROR = 'unhandledrejection',
   RESOURCE_ERROR = 'resourceError',
   HTTP_ERROR = 'httpError',
   WHITESCREEN_ERROE = 'whitescreenError',

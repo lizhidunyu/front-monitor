@@ -1,8 +1,6 @@
-// import { autoTrackerClick, customTrackerClick } from '../../behavior/index'
 import { IOptions, ICustomErrOptions, VueInstance } from '../src/types'
 import { reportData, CacheEvents, getFlag, setFlag } from '../../utils'
 import { setupReplace } from './utils/setup-raplace'
-// import { errorCapture } from './core/catch-error'
 import { setOptions } from './core/config'
 import { PROJECT_TYPE } from '../../utils/src/constants'
 import { ViewModel } from './types/config'
@@ -18,7 +16,7 @@ class Monitor {
   // 初始化
   init() {
     // 初始化操作用户配置
-    setOptions(this.options)
+    this.options = setOptions(this.options)
     // 初始化事件机制
     setupReplace()
     if (this.options.autoTracker) {
@@ -64,10 +62,13 @@ class Monitor {
   }
 
   // 注册插件（性能插件/录屏插件）
-  // TODO: 优化当前的逻辑
   use(plugin: any, options: IOptions) {
     const instance = new plugin(options || this.options.performanceConfig)
-    instance.core({ reportData, CacheEvents, options })
+    instance.core({
+      reportData,
+      CacheEvents,
+      options: this.options
+    })
   }
 }
 

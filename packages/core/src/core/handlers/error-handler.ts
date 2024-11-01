@@ -4,7 +4,7 @@ import { notify } from '../../utils/subscribe'
 
 export const listenError = (): void => {
   on(window, 'error', function (e: ErrorEvent) {
-    notify(ERROR_TYPE.JS_ERROR)
+    notify(ERROR_TYPE.JS_ERROR, e)
   })
 }
 

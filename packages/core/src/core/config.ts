@@ -2,7 +2,7 @@ import { reportData } from '../../../utils'
 import { IOptions } from '../types'
 import { cacheEvents } from '../utils/cache-events'
 
-const options: IOptions = {
+let options: IOptions = {
   // 默认配置
   url: 'http://localhost:8000/report',
   appId: '',
@@ -39,18 +39,25 @@ const options: IOptions = {
   }
 }
 
-function setOptions(options: Partial<IOptions>, target: any = options): void {
+function setOptions(userOptions: Partial<IOptions>): any {
   // 用户配置替换默认的配置
-  for (const key in options) {
-    if (options[key] !== undefined) {
-      if (typeof options[key] === 'object' && options[key] !== null) {
-        target[key] = target[key] || {}
-        setOptions(options[key] as Partial<IOptions>, target[key])
-      } else {
-        target[key] = options[key]
-      }
+  options = {
+    ...options,
+    ...userOptions,
+    reportConfig: {
+      ...options.reportConfig,
+      ...userOptions.reportConfig
+    },
+    performanceConfig: {
+      ...options.performanceConfig,
+      ...userOptions.performanceConfig
+    },
+    recordConfig: {
+      ...options.recordConfig,
+      ...userOptions.recordConfig
     }
   }
+
   // 初始化用户行为栈
   console.log(options)
 
@@ -59,6 +66,8 @@ function setOptions(options: Partial<IOptions>, target: any = options): void {
 
   // 初始化上报信息
   reportData.bindOptions(options)
+
+  return options
 }
 
 export { options, setOptions }
