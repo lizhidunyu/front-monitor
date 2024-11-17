@@ -43,7 +43,6 @@ const HandleEvents = {
 
   // window.addEventListener()传入的对象
   handleError(ev: ErrorTarget): void {
-    console.log(' window.addEventListener--ev:', ev)
     const target = ev?.target
     if (!target || (ev.target && !ev.target.localName)) {
       // vue和react捕获的报错使用ev解析，异步错误使用ev.error解析

@@ -32,11 +32,11 @@ export enum PROJECT_TYPE {
 export enum ERROR_TYPE {
   JS_ERROR = 'jsError',
   PROMISE_ERROR = 'unhandledrejection',
-  RESOURCE_ERROR = 'resourceError',
+  RESOURCE_ERROR = 'resource',
   HTTP_ERROR = 'httpError',
   WHITESCREEN_ERROE = 'whitescreenError',
-  XHR_ERROR = 'xhrError',
-  FETCH_ERROR = 'fetchError'
+  XHR_ERROR = 'xhr',
+  FETCH_ERROR = 'fetch'
 }
 
 export enum BUSINESS_TYPE {

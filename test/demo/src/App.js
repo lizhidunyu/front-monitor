@@ -8,7 +8,12 @@ const monitor = new Monitor({
   userId: '123',
   url: 'http://localhost:8000/report',
   appKey: '11',
-  skeletonProject: true
+  skeletonProject: true,
+  repeatCodeError: true,
+  handleHttpStatus(data) {
+    let { status } = data
+    return status !== 404 ? true : false
+  }
   // reportConfig: { isImgReport: true }
 })
 
@@ -31,6 +36,18 @@ const App = () => (
       type="primary"
       style={{ marginRight: '10px' }}
       onClick={(e) => {
+        setTimeout(() => {
+          let a = undefined
+          console.log(a.length)
+        }, 1000)
+      }}
+    >
+      异步错误
+    </Button>
+    <Button
+      type="primary"
+      style={{ marginRight: '10px' }}
+      onClick={(e) => {
         Promise.reject('error-123')
       }}
     >
@@ -48,16 +65,26 @@ const App = () => (
     >
       HTTP错误
     </Button>
-
+    <Button
+      type="primary"
+      style={{ marginRight: '10px' }}
+      onClick={(e) => {
+        const img = new Image()
+        img.src = '/path/to/nonexistent-image.jpg'
+        document.head.appendChild(img)
+      }}
+    >
+      资源错误
+    </Button>
     <Button
       type="primary"
       onClick={(e) => {
-        // monitor.handleCustomError({
-        //   message: 'Oops something went wrong',
-        //   error: '未知错误',
-        //   errorType: 'jsError'
-        // })
-        // e.stopPropagation()
+        monitor.handleCustomError({
+          message: 'Oops something went wrong',
+          error: '未知错误',
+          errorType: 'jsError'
+        })
+        e.stopPropagation()
       }}
     >
       自定义错误
