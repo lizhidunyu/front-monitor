@@ -20,7 +20,6 @@ export const fetchReplace = (): void => {
   if (!('fetch' in window)) {
     return
   }
-  // TODO： 比较fetch和xhr两种方式的区别
   replaceAop(window, ERROR_TYPE.FETCH_ERROR, (originalFetch) => {
     return (url: any, config: Partial<Request> = {}) => {
       const sTime = Date.now()

@@ -17,7 +17,7 @@ app.all('/report', (req, res) => {
   // console.log(`${callback}(${JSON.stringify(responseData)});`)
   // res.send(`${callback}(${JSON.stringify(responseData)});`)
   // res.send(JSON.stringify(req))
-  res.send('OK')
+  res.send('OK---')
 })
 
 // 启动服务器

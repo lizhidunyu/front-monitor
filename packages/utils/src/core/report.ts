@@ -9,7 +9,7 @@
 /**
  * @description: 上报数据信息
  */
-
+import { stringify } from 'flatted'
 import { cacheEvents } from '../../../core/src/utils/cache-events'
 import { IOptions } from '../../..//core/src/types'
 import { options } from '../../..//core/src/core'
@@ -33,8 +33,15 @@ export class ReportData {
   beacon(url: string, data: IReportData) {
     if (isSupportSendBeacon()) {
       console.log('beacon:', data)
+      let resData
 
-      return window.navigator.sendBeacon(url, JSON.stringify(data))
+      try {
+        resData = JSON.stringify(data)
+      } catch (error) {
+        console.error('Error serializing data to JSON:', error)
+      }
+      return window.navigator.sendBeacon(url, resData)
+      // return window.navigator.sendBeacon(url, data as unknown as any)
     }
   }
 
@@ -42,24 +49,40 @@ export class ReportData {
   imgRequest(url: string, data: IReportData) {
     const requestFun = () => {
       const img = new Image()
-      const spliceStr = url.indexOf('?') === -1 ? '?' : '&'
-      img.src = `${url}${spliceStr}data=${encodeURIComponent(JSON.stringify(data))}`
+      const spliceStr = url?.indexOf('?') === -1 ? '?' : '&'
+      try {
+        const encodedData = encodeURIComponent(JSON.stringify(data))
+        img.src = `${url}${spliceStr}data=${encodedData}`
+      } catch (error) {
+        console.error('Error serializing data to JSON:', error)
+        // 处理错误，例如使用默认值或显示错误消息
+      }
     }
     this.queue.addFn(requestFun)
   }
 
   // xhr请求
   async xhrPost(url: string, data: IReportData): Promise<void> {
-    const requestFun = () => {
+    let requestFun = null
+    let resData: any
+
+    try {
+      resData = JSON.stringify(data)
+    } catch (error) {
+      console.error('Error serializing data to JSON:', error)
+    }
+
+    requestFun = () => {
       fetch(`${url}`, {
         method: 'POST',
-        body: JSON.stringify(data),
+        body: resData,
         headers: {
           'Content-Type': 'application/json'
         }
       })
     }
-    this.queue.addFn(requestFun)
+
+    this.queue.addFn(requestFun as unknown as any)
   }
 
   async beforePost(
@@ -90,7 +113,7 @@ export class ReportData {
 
   // 判断是否为SDK配置的接口
   isSdkTransportUrl(targetUrl: string): boolean {
-    if (this.url && targetUrl.indexOf(this.url) !== -1) {
+    if (this.url && targetUrl?.indexOf(this.url) !== -1) {
       return true
     }
     return false

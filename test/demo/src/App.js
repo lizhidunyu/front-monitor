@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Breadcrumb } from 'antd'
+import { Button, Breadcrumb, Skeleton } from 'antd'
 import { Monitor } from '@front-monitor/core'
 import PerformancePlugin from '@front-monitor/performance'
 // import recordPlugin from '@front-monitor/record'
@@ -8,7 +8,8 @@ const monitor = new Monitor({
   userId: '123',
   url: 'http://localhost:8000/report',
   appKey: '11',
-  reportConfig: { isImgReport: true }
+  skeletonProject: true
+  // reportConfig: { isImgReport: true }
 })
 
 monitor.init()
@@ -20,11 +21,8 @@ const App = () => (
       type="primary"
       style={{ marginRight: '10px' }}
       onClick={(e) => {
-        const bar = 'aa'
-        const foo = () => {
-          bar()
-        }
-        foo()
+        const a = undefined
+        console.log(a.length)
       }}
     >
       JS错误
@@ -37,6 +35,18 @@ const App = () => (
       }}
     >
       promise错误
+    </Button>
+
+    <Button
+      type="primary"
+      style={{ marginRight: '10px' }}
+      onClick={(e) => {
+        fetch('http://localhost:8000/repor').then((res) => {
+          console.log(res)
+        })
+      }}
+    >
+      HTTP错误
     </Button>
 
     <Button
@@ -68,6 +78,7 @@ const App = () => (
         }
       ]}
     />
+    <Skeleton />
   </div>
 )
 

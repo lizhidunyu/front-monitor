@@ -11,7 +11,7 @@ export class Queue {
       fn()
       return
     }
-    this.stack.push(fn())
+    this.stack.push(fn)
     if (!this.isFlushing) {
       this.isFlushing = true
       // 优先使用requestIdleCallback
@@ -34,6 +34,8 @@ export class Queue {
     this.stack = []
     this.isFlushing = false
     for (let i = 0; i < flushStack.length; i++) {
+      console.log('flushStack:', flushStack)
+
       flushStack[i]()
     }
   }

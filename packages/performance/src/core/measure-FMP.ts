@@ -50,7 +50,7 @@ export class FMPTiming {
   doTag(target: Element, callbackCount: number | string) {
     let tagName = target.tagName
 
-    if (IGNORE_TAG_SET.indexOf(tagName) === -1) {
+    if (IGNORE_TAG_SET?.indexOf(tagName) === -1) {
       let childs = target?.children
       if (childs.length > 0) {
         for (let i = childs.length - 1; i >= 0; i--) {

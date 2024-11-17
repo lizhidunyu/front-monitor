@@ -38,10 +38,11 @@ const workercode = () => {
 }
 
 let code = workercode.toString()
-code = code.substring(code.indexOf('{') + 1, code.lastIndexOf('}'))
+code = code.substring(code?.indexOf('{') + 1, code.lastIndexOf('}'))
 
 const blob = new Blob([code], { type: 'application/javascript' })
 
 const worker_script = URL.createObjectURL(blob)
+console.log('worker_script:', worker_script)
 
 export default worker_script

@@ -1,4 +1,4 @@
-import ErrorStackParser from 'error-stack-parser'
+// import ErrorStackParser from 'error-stack-parser'
 
 // 对应事件的回调函数数组
 // 这些时间会被收集到依赖数组中，当对应的事件被触发的时候，就会来到这里触发所有依赖（函数）
@@ -25,7 +25,6 @@ const HandleEvents = {
     // 添加用户行为，去掉自身上报的接口行为
     if (!data.url.includes(options.url)) {
       cacheEvents.push({
-        // todo:在cacheEvents映射类型
         category: cacheEvents.getCategory(type),
         data: result,
         // @ts-ignore
@@ -42,23 +41,23 @@ const HandleEvents = {
     }
   },
 
-  // window.addEventListenner()传入的对象
+  // window.addEventListener()传入的对象
   handleError(ev: ErrorTarget): void {
     console.log(' window.addEventListener--ev:', ev)
     const target = ev?.target
     if (!target || (ev.target && !ev.target.localName)) {
       // vue和react捕获的报错使用ev解析，异步错误使用ev.error解析
-      const stackFrame = ErrorStackParser.parse(!target ? ev : ev.error)[0]
+      // const stackFrame = ErrorStackParser.parse(!target ? ev : ev.error)[0]
 
-      const { fileName, columnNumber, lineNumber } = stackFrame
+      // const { fileName, columnNumber, lineNumber } = stackFrame
       const errorData = {
         type: ERROR_TYPE.JS_ERROR,
         status: STATUS_CODE.ERROR,
         time: getTimestamp(),
-        message: ev.message,
-        fileName,
-        line: lineNumber,
-        column: columnNumber
+        message: ev.message
+        // fileName,
+        // line: lineNumber,
+        // column: columnNumber
       }
       cacheEvents.push({
         type: ERROR_TYPE.JS_ERROR,
@@ -68,8 +67,8 @@ const HandleEvents = {
         status: STATUS_CODE.ERROR
       })
       const hash: string = getErrorUid(
-        `${ERROR_TYPE.JS_ERROR}-${ev.message}-${fileName}-${columnNumber}`
-        // `${ERROR_TYPE.JS_ERROR}`
+        // `${ERROR_TYPE.JS_ERROR}-${ev.message}-${fileName}-${columnNumber}`
+        `${ERROR_TYPE.JS_ERROR}`
       )
       // 开启repeatCodeError第一次报错才上报
       if (
@@ -136,17 +135,17 @@ const HandleEvents = {
   // 异常错误，添加到行为栈
   handleUnhandleRejection(ev: PromiseRejectionEvent): void {
     console.log('handleUnhandleRejection--ev:', ev)
-    const stackFrame = ErrorStackParser.parse(ev.reason)[0]
-    const { fileName, columnNumber, lineNumber } = stackFrame
+    // const stackFrame = ErrorStackParser.parse(ev.reason)[0]
+    // const { fileName, columnNumber, lineNumber } = stackFrame
     const message = unknownToString(ev.reason.message || ev.reason.stack)
     const data = {
       type: ERROR_TYPE.PROMISE_ERROR,
       status: STATUS_CODE.ERROR,
       time: getTimestamp(),
-      message,
-      fileName,
-      line: lineNumber,
-      column: columnNumber
+      message
+      // fileName,
+      // line: lineNumber,
+      // column: columnNumber
     }
 
     cacheEvents.push({
@@ -157,8 +156,8 @@ const HandleEvents = {
       data
     })
     const hash: string = getErrorUid(
-      `${ERROR_TYPE.PROMISE_ERROR}-${message}-${fileName}-${columnNumber}`
-      // `${ERROR_TYPE.PROMISE_ERROR}-${message}`
+      // `${ERROR_TYPE.PROMISE_ERROR}-${message}-${fileName}-${columnNumber}`
+      `${ERROR_TYPE.PROMISE_ERROR}-${message}`
     )
     // 开启repeatCodeError第一次报错才上报
     if (

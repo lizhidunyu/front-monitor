@@ -22,6 +22,8 @@ import { measureLongTask } from './measure-long-task'
 import { reportResource } from './observe-load'
 import { TYPES } from '../../../utils/src/constants'
 
+// import { createFMPMonitor } from './measure-FMP/index'
+
 export const getWebVitals = (performanceConfig: any, reportData: any) => {
   const measuresToExecute = Object.keys(performanceConfig).filter(
     (key) => performanceConfig[key as keyof typeof performanceConfig] != false

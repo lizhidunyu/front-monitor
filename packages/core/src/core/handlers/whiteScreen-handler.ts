@@ -76,8 +76,11 @@ export function openWhiteScreen(
       if (i != 5) {
         if (isContainer(yElements[0] as HTMLElement)) emptyPoints++
       }
+
+      console.log('xElements:', xElements, 'yElements', yElements)
     }
-    // console.log('_skeletonInitList', _skeletonInitList, _skeletonNowList);
+
+    console.log('_skeletonInitList', _skeletonInitList, _skeletonNowList)
 
     // 页面正常渲染，停止轮训
     if (emptyPoints != 17) {
